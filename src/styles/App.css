@@ -41,3 +41,12 @@
   color: #888;
 }
  */
+
+.wrapper {
+	display: flex;
+	position: relative;
+}
+
+.wrapper .content {
+	margin-left: clamp(200px, 20%, 350px);
+}

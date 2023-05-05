@@ -1,0 +1,37 @@
+.sidebar {
+	position: fixed;
+	min-width: 200px;
+	width: clamp(100px, 20%, 350px);
+	height: 100%;
+	background-color: lightgray;
+}
+
+.sidebar h2 {
+	text-transform: uppercase;
+	text-align: center;
+	margin: 20px 0px;
+}
+
+.sidebar ul {
+	padding-inline-start: 0px;
+}
+
+.sidebar ul li {
+	padding: 15px;
+	list-style: none;
+}
+
+.sidebar ul li:hover {
+	background-color: gray;
+}
+
+.sidebar ul a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	font-size: x-large;
+}
+
+.sidebar hr {
+	margin: 0px 5px;
+}

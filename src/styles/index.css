@@ -68,3 +68,7 @@ button:focus-visible {
 	}
 }
  */
+
+* {
+	margin: 0;
+}
