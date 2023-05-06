@@ -12,7 +12,7 @@ function App() {
 	return (
 		<div className="wrapper">
 			<Router>
-				<Navigation />
+				{window.location.pathname != '/' && <Navigation />}
 				<div className="content">
 					<Routes>
 						<Route path="/" element={<LoginPage />} />
