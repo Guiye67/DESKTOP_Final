@@ -4,6 +4,7 @@
 	width: clamp(100px, 20%, 350px);
 	height: 100%;
 	background-color: lightgray;
+	box-shadow: rgba(0, 0, 0, 0.35) -10px 0px 50px;
 }
 
 .sidebar h2 {

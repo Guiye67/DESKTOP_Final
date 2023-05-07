@@ -23,7 +23,6 @@ export const LoginForm = () => {
 			setResult(loginResult);
 		} else {
 			navigate('/clients');
-			window.location.reload();
 		}
 
 		form.reset();
