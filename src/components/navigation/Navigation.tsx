@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import '../../styles/Navigation.css';
+import { UserBox } from './UserBox';
 
 export const Navigation = () => {
 	return (
 		<>
 			<div className="sidebar">
-				<h2>Navigation</h2>
+				<h1>Gym & Yang</h1>
 				<ul>
 					<NavLink to="/clients">
 						<li>Clients</li>
@@ -27,6 +28,9 @@ export const Navigation = () => {
 						<li>Diets</li>
 					</NavLink>
 				</ul>
+				<div className="user-box">
+					<UserBox />
+				</div>
 			</div>
 		</>
 	);

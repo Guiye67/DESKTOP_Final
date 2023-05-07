@@ -20,7 +20,6 @@ export const loginSlice = createSlice({
 	initialState,
 	reducers: {
 		doLogin: (_state, action: PayloadAction<Admin>) => {
-			console.log(action.payload);
 			return { ...action.payload };
 		},
 		doLogout: () => {

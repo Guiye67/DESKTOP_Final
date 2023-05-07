@@ -7,10 +7,12 @@
 	box-shadow: rgba(0, 0, 0, 0.35) -10px 0px 50px;
 }
 
-.sidebar h2 {
+.sidebar h1 {
 	text-transform: uppercase;
 	text-align: center;
 	margin: 20px 0px;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 .sidebar ul {
@@ -35,4 +37,15 @@
 
 .sidebar hr {
 	margin: 0px 5px;
+}
+
+.sidebar .user-box {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	height: 60px;
+	width: 100%;
+	background-color: white;
+	position: absolute;
+	bottom: 0px;
 }

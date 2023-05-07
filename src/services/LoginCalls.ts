@@ -1,9 +1,9 @@
-import { Admin, AdminResponse, CallError } from '../models/Admin';
+import { Admin, AdminResponse } from '../models/Admin';
+import { CallError } from '../models/CallError';
 
 export const LoginCall = async (email: string, password: string) => {
 	const requestOptions: RequestInit = {
 		method: 'POST',
-		mode: 'cors',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ email, password }),
 	};

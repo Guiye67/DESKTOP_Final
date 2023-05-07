@@ -13,7 +13,3 @@ export interface AdminResponse {
 	};
 	token: string;
 }
-
-export interface CallError {
-	message: string;
-}

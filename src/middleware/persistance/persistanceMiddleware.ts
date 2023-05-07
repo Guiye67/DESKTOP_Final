@@ -7,10 +7,9 @@ export const persistanceMiddleware =
 	(next: (arg0: any) => void) =>
 	(action: PayloadAction) => {
 		next(action);
-		console.log(store);
 		if (action.type === 'login/doLogin')
 			localStorage.setItem(
-				'loged__user',
+				'logged__user',
 				JSON.stringify(store.getState().login)
 			);
 	};
