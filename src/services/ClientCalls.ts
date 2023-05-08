@@ -1,5 +1,5 @@
 import { CallError } from '../models/CallError';
-import { Client, ClientResponse } from '../models/Client';
+import { Client, ClientNew, ClientResponse } from '../models/Client';
 
 export const GetAllClients = async (token: string) => {
 	const requestOptions: RequestInit = {
@@ -10,11 +10,20 @@ export const GetAllClients = async (token: string) => {
 		},
 	};
 
-	return fetch('http://localhost:8080/clients/', requestOptions)
-		.then(async (response) => {
+	return fetch('http://localhost:8080/clients/', requestOptions).then(
+		async (response) => {
 			if (response.status != 200) {
 				const err: CallError = (await response.json()) as CallError;
-				throw new Error(err.message);
+				return [
+					{
+						id: '-1',
+						email: err.message,
+						name: '',
+						surname: '',
+						payment: '',
+						classes: [],
+					},
+				] as Client[];
 			}
 
 			const data: ClientResponse[] =
@@ -31,18 +40,28 @@ export const GetAllClients = async (token: string) => {
 				} as Client);
 			});
 			return output;
-		})
-		.catch((err: string) => {
-			console.log(err);
-			return [
-				{
-					id: '-1',
-					email: '',
-					name: '',
-					surname: '',
-					payment: '',
-					classes: [],
-				},
-			] as Client[];
-		});
+		}
+	);
+};
+
+export const CreateClient = (newClient: ClientNew, token: string) => {
+	const requestOptions: RequestInit = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer: ${token}`,
+		},
+		body: JSON.stringify(newClient),
+	};
+
+	return fetch('http://localhost:8080/clients/', requestOptions).then(
+		async (response) => {
+			if (response.status != 200) {
+				const err: CallError = (await response.json()) as CallError;
+				return err.message;
+			}
+
+			return 'ok';
+		}
+	);
 };

@@ -3,7 +3,7 @@
 	min-width: 200px;
 	width: clamp(100px, 20%, 350px);
 	height: 100%;
-	background-color: lightgray;
+	background-color: var(--color-purple);
 	box-shadow: rgba(0, 0, 0, 0.35) -10px 0px 50px;
 }
 
@@ -13,6 +13,7 @@
 	margin: 20px 0px;
 	font-size: 1.5em;
 	font-weight: bold;
+	color: white;
 }
 
 .sidebar ul {
@@ -25,18 +26,20 @@
 }
 
 .sidebar ul li:hover {
-	background-color: gray;
+	background-color: var(--color-dark-purple);
 }
 
 .sidebar ul a {
 	text-decoration: none;
 	font-weight: bold;
-	color: black;
+	color: white;
 	font-size: x-large;
+	text-shadow: 0px 0px 1px #000;
 }
 
 .sidebar hr {
 	margin: 0px 5px;
+	border-color: var(--color-dark-purple);
 }
 
 .sidebar .user-box {
@@ -45,7 +48,11 @@
 	padding: 5px;
 	height: 60px;
 	width: 100%;
-	background-color: white;
+	background-color: var(--color-dark-purple);
 	position: absolute;
 	bottom: 0px;
+}
+
+.sidebar .user-box * {
+	color: white;
 }

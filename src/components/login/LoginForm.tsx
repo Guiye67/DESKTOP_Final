@@ -59,8 +59,7 @@ export const LoginForm = () => {
 			</form>
 			{result != 'ok' && (
 				<Alert severity="error" className="alert">
-					{/*intentar cambiar mensaje por result*/}
-					Login Error
+					{result}
 				</Alert>
 			)}
 		</>

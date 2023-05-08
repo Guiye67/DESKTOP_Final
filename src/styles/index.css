@@ -8,6 +8,8 @@ body {
 	height: 100%;
 	padding: 0;
 	background-color: lightgray;
+	--color-purple: rgb(121, 81, 168);
+	--color-dark-purple: rgb(105, 54, 158);
 }
 
 #root {

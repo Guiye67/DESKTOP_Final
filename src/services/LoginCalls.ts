@@ -8,11 +8,16 @@ export const LoginCall = async (email: string, password: string) => {
 		body: JSON.stringify({ email, password }),
 	};
 
-	return fetch('http://localhost:8080/admins/login', requestOptions)
-		.then(async (response) => {
+	return fetch('http://localhost:8080/admins/login', requestOptions).then(
+		async (response) => {
 			if (response.status != 200) {
 				const err: CallError = (await response.json()) as CallError;
-				throw new Error(err.message);
+				return {
+					id: '-1',
+					email: err.message,
+					password: '',
+					token: '',
+				} as Admin;
 			}
 
 			const data: AdminResponse = (await response.json()) as AdminResponse;
@@ -22,14 +27,6 @@ export const LoginCall = async (email: string, password: string) => {
 				password: data.adminFound.password,
 				token: data.token,
 			} as Admin;
-		})
-		.catch((err: string) => {
-			console.log(err);
-			return {
-				id: '-1',
-				email: err,
-				password: '',
-				token: '',
-			} as Admin;
-		});
+		}
+	);
 };

@@ -1,5 +1,4 @@
 import {
-	Card,
 	Table,
 	TableRow,
 	TableCell,
@@ -25,35 +24,33 @@ const generateClassesString = (classes: string[]): string => {
 export const ClientsTable: React.FC<Props> = ({ clients }: Props) => {
 	return (
 		<>
-			<Card>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableHeaderCell> ID </TableHeaderCell>
-							<TableHeaderCell className="text-right">Name</TableHeaderCell>
-							<TableHeaderCell className="text-right">Surname</TableHeaderCell>
-							<TableHeaderCell className="text-right">Email</TableHeaderCell>
-							<TableHeaderCell className="text-right">Payment</TableHeaderCell>
-							<TableHeaderCell className="text-right">Classes</TableHeaderCell>
-						</TableRow>
-					</TableHead>
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableHeaderCell> ID </TableHeaderCell>
+						<TableHeaderCell className="text-right">Name</TableHeaderCell>
+						<TableHeaderCell className="text-right">Surname</TableHeaderCell>
+						<TableHeaderCell className="text-right">Email</TableHeaderCell>
+						<TableHeaderCell className="text-right">Payment</TableHeaderCell>
+						<TableHeaderCell className="text-right">Classes</TableHeaderCell>
+					</TableRow>
+				</TableHead>
 
-					<TableBody>
-						{clients.map((client) => (
-							<TableRow key={client.id}>
-								<TableCell>{client.id}</TableCell>
-								<TableCell className="text-right">{client.name}</TableCell>
-								<TableCell className="text-right">{client.surname}</TableCell>
-								<TableCell className="text-right">{client.email}</TableCell>
-								<TableCell className="text-right">{client.payment}</TableCell>
-								<TableCell className="text-right">
-									{generateClassesString(client.classes)}
-								</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</Card>
+				<TableBody>
+					{clients.map((client) => (
+						<TableRow key={client.id}>
+							<TableCell>{client.id}</TableCell>
+							<TableCell className="text-right">{client.name}</TableCell>
+							<TableCell className="text-right">{client.surname}</TableCell>
+							<TableCell className="text-right">{client.email}</TableCell>
+							<TableCell className="text-right">{client.payment}</TableCell>
+							<TableCell className="text-right">
+								{generateClassesString(client.classes)}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
 		</>
 	);
 };

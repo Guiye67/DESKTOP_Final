@@ -11,6 +11,8 @@ import {
 	PageNotExists,
 } from './pages/Pages';
 
+// https://www.schemecolor.com/grey-and-purple-color-scheme.php
+
 function App() {
 	const LoginContainer = () => {
 		return (

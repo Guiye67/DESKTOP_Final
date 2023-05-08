@@ -16,3 +16,12 @@ export interface ClientResponse {
 	payment: string;
 	classes: string[];
 }
+
+export interface ClientNew {
+	email: string;
+	password: string;
+	name: string;
+	surname: string;
+	payment: string;
+	classes: string[];
+}

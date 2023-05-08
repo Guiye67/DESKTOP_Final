@@ -9,7 +9,6 @@ export const useLoginActions = () => {
 		const admin = await LoginCall(email, password);
 
 		if (admin.id == '-1') {
-			console.log(admin.email);
 			return admin.email;
 		}
 
