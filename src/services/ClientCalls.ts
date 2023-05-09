@@ -56,6 +56,26 @@ export const CreateClient = (newClient: ClientNew, token: string) => {
 
 	return fetch('http://localhost:8080/clients/', requestOptions).then(
 		async (response) => {
+			if (response.status != 201) {
+				const err: CallError = (await response.json()) as CallError;
+				return err.message;
+			}
+
+			return 'ok';
+		}
+	);
+};
+
+export const DeleteClient = (id: string, token: string) => {
+	const requestOptions: RequestInit = {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer: ${token}`,
+		},
+	};
+	return fetch(`http://localhost:8080/clients/${id}`, requestOptions).then(
+		async (response) => {
 			if (response.status != 200) {
 				const err: CallError = (await response.json()) as CallError;
 				return err.message;

@@ -5,9 +5,8 @@
 html,
 body {
 	margin: 0;
-	height: 100%;
 	padding: 0;
-	background-color: lightgray;
+	height: 100%;
 	--color-purple: rgb(121, 81, 168);
 	--color-dark-purple: rgb(105, 54, 158);
 }

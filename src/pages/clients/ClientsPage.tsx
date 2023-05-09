@@ -1,27 +1,21 @@
 import { useEffect, useState } from 'react';
 import { ClientsTable } from '../../components/clients/ClientsTable';
-import { Client } from '../../models/Client';
 import '../../styles/ClientsPage.css';
 import { useAppSelector } from '../../hooks/store';
-import { GetAllClients } from '../../services/ClientCalls';
 import { Card } from '@tremor/react';
 import { CreateClientForm } from '../../components/clients/CreateClientForm';
+import { useClientActions } from '../../hooks/useClientsActions';
 
 export default function ClientsPage() {
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState('ok');
-	const [clients, setClients] = useState<Client[]>([]);
 	const [creating, setCreating] = useState(false);
 	const userToken = useAppSelector((state) => state.login.token);
+	const { getClients } = useClientActions();
 
 	const getAllClients = async () => {
 		setLoading(true);
-		const callResult = await GetAllClients(userToken);
-		if (callResult[0].id == '-1') setResult(callResult[0].email);
-		else {
-			setClients(callResult);
-			setResult('ok');
-		}
+		setResult(await getClients(userToken));
 		setLoading(false);
 	};
 
@@ -30,7 +24,7 @@ export default function ClientsPage() {
 	};
 
 	useEffect(() => {
-		if (clients.length == 0) void getAllClients();
+		void getAllClients();
 	}, []);
 
 	return (
@@ -50,7 +44,7 @@ export default function ClientsPage() {
 						<button onClick={handleRetryClick}>Retry</button>
 					</>
 				)}
-				{clients.length > 0 && <ClientsTable clients={clients} />}
+				{!loading && <ClientsTable token={userToken} />}
 			</Card>
 		</div>
 	);

@@ -1,8 +1,9 @@
 import { Card } from '@tremor/react';
 import { useState, useEffect } from 'react';
 import { GetAllClasses } from '../../services/ClassesCalls';
-import { Client, ClientNew } from '../../models/Client';
-import { CreateClient } from '../../services/ClientCalls';
+import { ClientNew } from '../../models/Client';
+import { useClientActions } from '../../hooks/useClientsActions';
+import { Alert } from '@mui/material';
 
 interface Props {
 	setCreating: (value: boolean) => void;
@@ -15,18 +16,20 @@ export const CreateClientForm: React.FC<Props> = ({
 }: Props) => {
 	const [result, setResult] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [loadingClasses, setloadingClasses] = useState(false);
 	const [classes, setClasses] = useState<string[]>([]);
 	const [clientClasses, setClientClasses] = useState<string[]>([]);
+	const { createNewClient } = useClientActions();
 
 	const getClasses = async () => {
-		setLoading(true);
+		setloadingClasses(true);
 		const allClasses = await GetAllClasses(token);
 		const list: string[] = [];
 		allClasses.forEach((item) => {
 			list.push(item.name);
 		});
 		setClasses(list);
-		setLoading(false);
+		setloadingClasses(false);
 	};
 
 	useEffect(() => {
@@ -34,6 +37,7 @@ export const CreateClientForm: React.FC<Props> = ({
 	}, []);
 
 	const handleCreate = async (event: React.FormEvent<HTMLFormElement>) => {
+		setLoading(true);
 		event.preventDefault();
 		const form = event.currentTarget;
 		const formData = new FormData(form);
@@ -52,11 +56,9 @@ export const CreateClientForm: React.FC<Props> = ({
 			classes: clientClasses,
 		};
 
-		console.log(JSON.stringify(newClient));
+		const postResult = await createNewClient(newClient, token);
 
-		const postResult = await CreateClient(newClient, token);
-
-		console.log(postResult);
+		setLoading(false);
 
 		if (postResult != 'ok') {
 			setResult(postResult);
@@ -76,7 +78,6 @@ export const CreateClientForm: React.FC<Props> = ({
 		} else {
 			newList = newList.filter((x) => x !== event.target.value);
 		}
-		console.log(newList);
 		setClientClasses(newList);
 	};
 
@@ -123,22 +124,23 @@ export const CreateClientForm: React.FC<Props> = ({
 							</tr>
 							<tr>
 								<td colSpan={4}>
-									{loading ? (
-										<p>Loading...</p>
+									{loadingClasses ? (
+										<Alert severity="info" className="alert">
+											Loading...
+										</Alert>
 									) : (
 										<>
-											{classes.map((item) => (
-												<>
-													<label className="checkbox-label">
-														<input
-															type="checkbox"
-															id={item}
-															value={item}
-															onChange={handleCheckboxChange}
-														/>{' '}
-														{item}
-													</label>
-												</>
+											{classes.map((item, index) => (
+												<label className="checkbox-label" key={index}>
+													<input
+														key={index}
+														type="checkbox"
+														id={item}
+														value={item}
+														onChange={handleCheckboxChange}
+													/>{' '}
+													{item}
+												</label>
 											))}
 										</>
 									)}
@@ -149,7 +151,11 @@ export const CreateClientForm: React.FC<Props> = ({
 									<button id="create-btn" type="submit">
 										Create
 									</button>
-									<button id="cancel-btn" onClick={() => setCreating(false)}>
+									<button
+										id="cancel-btn"
+										type="reset"
+										onClick={() => setCreating(false)}
+									>
 										Cancel
 									</button>
 								</td>
@@ -157,11 +163,20 @@ export const CreateClientForm: React.FC<Props> = ({
 						</tbody>
 					</table>
 				</form>
-				{result != '' && result != 'ok' && (
-					<p style={{ color: 'red' }}>Error: {result}</p>
+				{loading && (
+					<Alert severity="info" className="alert">
+						Loading...
+					</Alert>
 				)}
-				{result != '' && result == 'ok' && (
-					<p style={{ color: 'darkgreen' }}>Success: Client created</p>
+				{!loading && result != '' && result != 'ok' && (
+					<Alert severity="error" className="alert">
+						Error: {result}
+					</Alert>
+				)}
+				{!loading && result != '' && result == 'ok' && (
+					<Alert severity="success" className="alert">
+						Success: Client created
+					</Alert>
 				)}
 			</Card>
 		</>

@@ -6,6 +6,7 @@
 	font-size: 2em;
 	font-weight: bold;
 }
+
 .clients-page .title {
 	position: relative;
 }
@@ -82,4 +83,13 @@
 
 #create-btn:hover {
 	background-color: green;
+}
+
+.clients-page .bi-pencil-square {
+	margin-right: 15px;
+}
+
+.clients-page i {
+	cursor: pointer;
+	font-size: larger;
 }

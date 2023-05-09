@@ -6,7 +6,8 @@ export default function LoginPage() {
 		<>
 			<div className="login">
 				<div className="login-box">
-					<h1>Login Page</h1>
+					<h1>Welcome!!</h1>
+					<h2>Please Log In</h2>
 					<LoginForm />
 				</div>
 			</div>

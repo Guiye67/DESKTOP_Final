@@ -6,33 +6,44 @@ import {
 	TableHeaderCell,
 	TableBody,
 } from '@tremor/react';
-import { Client } from '../../models/Client';
+import { useClientActions } from '../../hooks/useClientsActions';
+import { useAppSelector } from '../../hooks/store';
 
 interface Props {
-	clients: Client[];
+	token: string;
 }
 
-const generateClassesString = (classes: string[]): string => {
-	let output = '';
-	for (let i = 0; i < classes.length; i++) {
-		if (i == classes.length - 1) output = output.concat(classes[i]);
-		else output = output.concat(`${classes[i]}, `);
-	}
-	return output;
-};
+export const ClientsTable: React.FC<Props> = ({ token }: Props) => {
+	const { deleteClientById } = useClientActions();
+	const clients = useAppSelector((state) => state.clients);
 
-export const ClientsTable: React.FC<Props> = ({ clients }: Props) => {
+	const handleEdit = () => {};
+
+	const handleDelete = async (id: string) => {
+		await deleteClientById(id, token);
+	};
+
+	const generateClassesString = (classes: string[]): string => {
+		let output = '';
+		for (let i = 0; i < classes.length; i++) {
+			if (i == classes.length - 1) output = output.concat(classes[i]);
+			else output = output.concat(`${classes[i]}, `);
+		}
+		return output;
+	};
+
 	return (
 		<>
 			<Table>
 				<TableHead>
 					<TableRow>
 						<TableHeaderCell> ID </TableHeaderCell>
-						<TableHeaderCell className="text-right">Name</TableHeaderCell>
-						<TableHeaderCell className="text-right">Surname</TableHeaderCell>
-						<TableHeaderCell className="text-right">Email</TableHeaderCell>
-						<TableHeaderCell className="text-right">Payment</TableHeaderCell>
+						<TableHeaderCell>Email</TableHeaderCell>
+						<TableHeaderCell>Name</TableHeaderCell>
+						<TableHeaderCell>Surname</TableHeaderCell>
+						<TableHeaderCell>Payment</TableHeaderCell>
 						<TableHeaderCell className="text-right">Classes</TableHeaderCell>
+						<TableHeaderCell className="text-right"></TableHeaderCell>
 					</TableRow>
 				</TableHead>
 
@@ -40,12 +51,19 @@ export const ClientsTable: React.FC<Props> = ({ clients }: Props) => {
 					{clients.map((client) => (
 						<TableRow key={client.id}>
 							<TableCell>{client.id}</TableCell>
-							<TableCell className="text-right">{client.name}</TableCell>
-							<TableCell className="text-right">{client.surname}</TableCell>
-							<TableCell className="text-right">{client.email}</TableCell>
-							<TableCell className="text-right">{client.payment}</TableCell>
+							<TableCell>{client.email}</TableCell>
+							<TableCell>{client.name}</TableCell>
+							<TableCell>{client.surname}</TableCell>
+							<TableCell>{client.payment}</TableCell>
 							<TableCell className="text-right">
 								{generateClassesString(client.classes)}
+							</TableCell>
+							<TableCell className="text-right">
+								<i className="bi bi-pencil-square" onClick={handleEdit}></i>
+								<i
+									className="bi bi-trash"
+									onClick={() => void handleDelete(client.id)}
+								></i>
 							</TableCell>
 						</TableRow>
 					))}

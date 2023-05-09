@@ -55,7 +55,7 @@ export const LoginForm = () => {
 					></i>
 				</p>
 
-				<button type="submit">Login</button>
+				<button type="submit">Log In</button>
 			</form>
 			{result != 'ok' && (
 				<Alert severity="error" className="alert">

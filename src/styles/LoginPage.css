@@ -10,13 +10,34 @@
 	top: 50%;
 	transform: translateY(-50%);
 	padding: 100px;
-	background-color: rgb(232, 232, 232);
+	background-color: white;
 	border-radius: 10px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .login-box h1 {
-	margin: 0;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 32px;
+}
+
+.login-box h2 {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.login-box input {
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.login-box button {
+	background-color: var(--color-purple);
+	color: white;
+	margin-top: 10px;
+	padding: 5px 10px;
+	border-radius: 5px;
 }
 
 form i {

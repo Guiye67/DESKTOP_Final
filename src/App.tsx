@@ -17,7 +17,7 @@ function App() {
 	const LoginContainer = () => {
 		return (
 			<>
-				<div className="content">
+				<div className="login-content">
 					<Routes>
 						<Route path="/" element={<LoginPage />} />
 					</Routes>

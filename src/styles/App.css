@@ -8,5 +8,14 @@
 	margin-left: clamp(200px, 20%, 350px);
 	height: 100%;
 	width: 100%;
+	background-color: lightgray;
+	overflow-x: hidden;
+}
+
+.wrapper .login-content {
+	padding-left: clamp(200px, 20%, 350px);
+	height: 100%;
+	width: 100%;
 	overflow: hidden;
+	background-color: var(--color-purple);
 }
