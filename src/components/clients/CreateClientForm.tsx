@@ -1,9 +1,10 @@
 import { Card } from '@tremor/react';
 import { useState, useEffect } from 'react';
-import { GetAllClasses } from '../../services/ClassesCalls';
 import { ClientNew } from '../../models/Client';
 import { useClientActions } from '../../hooks/useClientsActions';
+import { useClassesActions } from '../../hooks/useClassesActions';
 import { Alert } from '@mui/material';
+import { useAppSelector } from '../../hooks/store';
 
 interface Props {
 	setCreating: (value: boolean) => void;
@@ -17,23 +18,19 @@ export const CreateClientForm: React.FC<Props> = ({
 	const [result, setResult] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [loadingClasses, setloadingClasses] = useState(false);
-	const [classes, setClasses] = useState<string[]>([]);
+	const classes = useAppSelector((state) => state.classes);
 	const [clientClasses, setClientClasses] = useState<string[]>([]);
+	const { getClasses } = useClassesActions();
 	const { createNewClient } = useClientActions();
 
-	const getClasses = async () => {
+	const getAllClasses = async () => {
 		setloadingClasses(true);
-		const allClasses = await GetAllClasses(token);
-		const list: string[] = [];
-		allClasses.forEach((item) => {
-			list.push(item.name);
-		});
-		setClasses(list);
+		await getClasses(token);
 		setloadingClasses(false);
 	};
 
 	useEffect(() => {
-		if (classes.length == 0) void getClasses();
+		void getAllClasses();
 	}, []);
 
 	const handleCreate = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -125,9 +122,7 @@ export const CreateClientForm: React.FC<Props> = ({
 							<tr>
 								<td colSpan={4}>
 									{loadingClasses ? (
-										<Alert severity="info" className="alert">
-											Loading...
-										</Alert>
+										<p>Loading...</p>
 									) : (
 										<>
 											{classes.map((item, index) => (
@@ -135,11 +130,11 @@ export const CreateClientForm: React.FC<Props> = ({
 													<input
 														key={index}
 														type="checkbox"
-														id={item}
-														value={item}
+														id={item.name}
+														value={item.name}
 														onChange={handleCheckboxChange}
 													/>{' '}
-													{item}
+													{item.name}
 												</label>
 											))}
 										</>

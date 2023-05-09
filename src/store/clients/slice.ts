@@ -3,8 +3,8 @@ import { Client } from '../../models/Client';
 
 const DEFAULT_STATE: Client[] = [];
 
-export const loginSlice = createSlice({
-	name: 'login',
+export const clientsSlice = createSlice({
+	name: 'clients',
 	initialState: DEFAULT_STATE,
 	reducers: {
 		setClients: (_state, action: PayloadAction<Client[]>) => {
@@ -25,6 +25,6 @@ export const loginSlice = createSlice({
 	},
 });
 
-export default loginSlice.reducer;
+export default clientsSlice.reducer;
 
-export const { setClients, updateClient, deleteClient } = loginSlice.actions;
+export const { setClients, updateClient, deleteClient } = clientsSlice.actions;
