@@ -14,7 +14,7 @@
 .clients-page .title button {
 	background-color: var(--color-purple);
 	color: white;
-	padding: 3px 10px;
+	padding: 5px 10px;
 	border-radius: 5px;
 	position: absolute;
 	right: 0;
@@ -39,20 +39,18 @@
 }
 
 .clients-page .create-card p {
-	font-size: large;
+	font-size: larger;
 	font-weight: bold;
-	margin-bottom: 20px;
 	text-transform: capitalize;
+}
+
+.clients-page .create-card label {
+	font-size: large;
 }
 
 .clients-page .create-card form input {
 	border-radius: 5px;
 	border: 1px solid black;
-}
-
-.clients-page .create-card .checkbox-label {
-	margin-right: 20px;
-	text-transform: capitalize;
 }
 
 .btns-cell {
@@ -62,7 +60,7 @@
 #cancel-btn {
 	margin-left: 10px;
 	margin-top: 10px;
-	padding: 3px 10px;
+	padding: 5px 15px;
 	border-radius: 5px;
 	background-color: rgb(220, 0, 0);
 	color: white;
@@ -75,7 +73,7 @@
 #create-btn {
 	margin-right: 10px;
 	margin-top: 10px;
-	padding: 3px 10px;
+	padding: 5px 15px;
 	border-radius: 5px;
 	background-color: rgb(0, 160, 0);
 	color: white;

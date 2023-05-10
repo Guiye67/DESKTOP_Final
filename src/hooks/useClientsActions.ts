@@ -5,12 +5,13 @@ import {
 	GetAllClients,
 } from '../services/ClientCalls';
 import { deleteClient, setClients } from '../store/clients/slice';
-import { useAppDispatch } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export const useClientActions = () => {
 	const dispatch = useAppDispatch();
+	const token = useAppSelector((state) => state.login.token);
 
-	const getClients = async (token: string): Promise<string> => {
+	const getClients = async (): Promise<string> => {
 		const clients: Client[] = await GetAllClients(token);
 
 		if (clients[0].id == '-1') return clients[0].email;
@@ -19,18 +20,15 @@ export const useClientActions = () => {
 		return 'ok';
 	};
 
-	const createNewClient = async (
-		newClient: ClientNew,
-		token: string
-	): Promise<string> => {
+	const createNewClient = async (newClient: ClientNew): Promise<string> => {
 		const result = await CreateClient(newClient, token);
 
-		if (result == 'ok') void getClients(token);
+		if (result == 'ok') void getClients();
 
 		return result;
 	};
 
-	const deleteClientById = async (id: string, token: string): Promise<void> => {
+	const deleteClientById = async (id: string): Promise<void> => {
 		const result = await DeleteClient(id, token);
 
 		if (result == 'ok') dispatch(deleteClient(id));

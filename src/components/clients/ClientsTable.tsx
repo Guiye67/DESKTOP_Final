@@ -5,35 +5,51 @@ import {
 	TableHead,
 	TableHeaderCell,
 	TableBody,
+	TextInput,
 } from '@tremor/react';
 import { useClientActions } from '../../hooks/useClientsActions';
 import { useAppSelector } from '../../hooks/store';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
+import { Client } from '../../models/Client';
 
-interface Props {
-	token: string;
-}
+const generateClassesString = (classes: string[]): string => {
+	let output = '';
+	for (let i = 0; i < classes.length; i++) {
+		if (i == classes.length - 1) output = output.concat(classes[i]);
+		else output = output.concat(`${classes[i]}, `);
+	}
+	return output;
+};
 
-export const ClientsTable: React.FC<Props> = ({ token }: Props) => {
+const getFilteredClients = (filter: string, clients: Client[]) => {
+	if (!filter) return clients;
+	return clients.filter((client) => client.email.includes(filter));
+};
+
+export const ClientsTable = () => {
 	const { deleteClientById } = useClientActions();
 	const clients = useAppSelector((state) => state.clients);
+	const [filter, setFilter] = useState('');
+	const [edit, setEdit] = useState(false);
 
-	const handleEdit = () => {};
+	const filteredClients = getFilteredClients(filter, clients);
 
-	const handleDelete = async (id: string) => {
-		await deleteClientById(id, token);
+	const handleEdit = () => {
+		// continue here
 	};
 
-	const generateClassesString = (classes: string[]): string => {
-		let output = '';
-		for (let i = 0; i < classes.length; i++) {
-			if (i == classes.length - 1) output = output.concat(classes[i]);
-			else output = output.concat(`${classes[i]}, `);
-		}
-		return output;
+	const handleDelete = async (id: string) => {
+		await deleteClientById(id);
 	};
 
 	return (
 		<>
+			<TextInput
+				icon={MagnifyingGlassIcon}
+				placeholder="Search email..."
+				onChange={(e) => setFilter(e.target.value)}
+			/>
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -48,8 +64,9 @@ export const ClientsTable: React.FC<Props> = ({ token }: Props) => {
 				</TableHead>
 
 				<TableBody>
-					{clients.map((client) => (
+					{filteredClients.map((client) => (
 						<TableRow key={client.id}>
+							{/* edit : (<p>Editting...</p>) ? (<p></p>) */}
 							<TableCell>{client.id}</TableCell>
 							<TableCell>{client.email}</TableCell>
 							<TableCell>{client.name}</TableCell>

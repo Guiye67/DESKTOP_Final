@@ -1,4 +1,4 @@
-import { Card } from '@tremor/react';
+import { Card, MultiSelectBox, MultiSelectBoxItem } from '@tremor/react';
 import { useState, useEffect } from 'react';
 import { ClientNew } from '../../models/Client';
 import { useClientActions } from '../../hooks/useClientsActions';
@@ -8,13 +8,9 @@ import { useAppSelector } from '../../hooks/store';
 
 interface Props {
 	setCreating: (value: boolean) => void;
-	token: string;
 }
 
-export const CreateClientForm: React.FC<Props> = ({
-	setCreating,
-	token,
-}: Props) => {
+export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 	const [result, setResult] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [loadingClasses, setloadingClasses] = useState(false);
@@ -25,7 +21,7 @@ export const CreateClientForm: React.FC<Props> = ({
 
 	const getAllClasses = async () => {
 		setloadingClasses(true);
-		await getClasses(token);
+		await getClasses();
 		setloadingClasses(false);
 	};
 
@@ -33,8 +29,28 @@ export const CreateClientForm: React.FC<Props> = ({
 		void getAllClasses();
 	}, []);
 
-	const handleCreate = async (event: React.FormEvent<HTMLFormElement>) => {
+	const createClient = async (
+		newClient: ClientNew,
+		form: EventTarget & HTMLFormElement
+	) => {
 		setLoading(true);
+
+		const postResult = await createNewClient(newClient);
+
+		setLoading(false);
+
+		if (postResult != 'ok') {
+			setResult(postResult);
+		} else {
+			setResult('ok');
+			form.reset();
+			setTimeout(() => {
+				setCreating(false);
+			}, 1000);
+		}
+	};
+
+	const handleCreate = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = event.currentTarget;
 		const formData = new FormData(form);
@@ -53,36 +69,13 @@ export const CreateClientForm: React.FC<Props> = ({
 			classes: clientClasses,
 		};
 
-		const postResult = await createNewClient(newClient, token);
-
-		setLoading(false);
-
-		if (postResult != 'ok') {
-			setResult(postResult);
-		} else {
-			setResult('ok');
-			form.reset();
-			setTimeout(() => {
-				setCreating(false);
-			}, 1000);
-		}
-	};
-
-	const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		let newList: string[] = clientClasses;
-		if (event.target.checked) {
-			newList.push(event.target.value);
-		} else {
-			newList = newList.filter((x) => x !== event.target.value);
-		}
-		setClientClasses(newList);
+		void createClient(newClient, form);
 	};
 
 	return (
 		<>
 			<Card className="create-card">
 				<p>New client form</p>
-				{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 				<form onSubmit={handleCreate}>
 					<table>
 						<tbody>
@@ -116,27 +109,24 @@ export const CreateClientForm: React.FC<Props> = ({
 							</tr>
 							<tr>
 								<td colSpan={4}>
-									<strong>Classes: </strong>
-								</td>
-							</tr>
-							<tr>
-								<td colSpan={4}>
 									{loadingClasses ? (
 										<p>Loading...</p>
 									) : (
 										<>
-											{classes.map((item, index) => (
-												<label className="checkbox-label" key={index}>
-													<input
-														key={index}
-														type="checkbox"
-														id={item.name}
+											<label>Classes:</label>{' '}
+											<MultiSelectBox
+												value={clientClasses}
+												onValueChange={setClientClasses}
+												className="select-classes"
+											>
+												{classes.map((item, index) => (
+													<MultiSelectBoxItem
 														value={item.name}
-														onChange={handleCheckboxChange}
-													/>{' '}
-													{item.name}
-												</label>
-											))}
+														text={item.name}
+														key={index}
+													/>
+												))}
+											</MultiSelectBox>
 										</>
 									)}
 								</td>
