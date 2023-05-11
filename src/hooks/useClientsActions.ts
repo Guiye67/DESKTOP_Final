@@ -3,6 +3,7 @@ import {
 	CreateClient,
 	DeleteClient,
 	GetAllClients,
+	UpdateClient,
 } from '../services/ClientCalls';
 import { deleteClient, setClients } from '../store/clients/slice';
 import { useAppDispatch, useAppSelector } from './store';
@@ -28,11 +29,19 @@ export const useClientActions = () => {
 		return result;
 	};
 
+	const updateClient = async (updatedClient: Client): Promise<string> => {
+		const result = await UpdateClient(updatedClient, token);
+		console.log(`---${result}`);
+		if (result == 'ok') void getClients();
+
+		return result;
+	};
+
 	const deleteClientById = async (id: string): Promise<void> => {
 		const result = await DeleteClient(id, token);
 
 		if (result == 'ok') dispatch(deleteClient(id));
 	};
 
-	return { getClients, createNewClient, deleteClientById };
+	return { getClients, createNewClient, updateClient, deleteClientById };
 };

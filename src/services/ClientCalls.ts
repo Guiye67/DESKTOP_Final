@@ -66,6 +66,29 @@ export const CreateClient = (newClient: ClientNew, token: string) => {
 	);
 };
 
+export const UpdateClient = (updatedClient: Client, token: string) => {
+	const requestOptions: RequestInit = {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer: ${token}`,
+		},
+		body: JSON.stringify(updatedClient),
+	};
+
+	return fetch(
+		`http://localhost:8080/clients/${updatedClient.id}`,
+		requestOptions
+	).then(async (response) => {
+		if (response.status > 299) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
+		}
+
+		return 'ok';
+	});
+};
+
 export const DeleteClient = (id: string, token: string) => {
 	const requestOptions: RequestInit = {
 		method: 'DELETE',

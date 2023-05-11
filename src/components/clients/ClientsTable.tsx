@@ -7,11 +7,11 @@ import {
 	TableBody,
 	TextInput,
 } from '@tremor/react';
-import { useClientActions } from '../../hooks/useClientsActions';
 import { useAppSelector } from '../../hooks/store';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { Client } from '../../models/Client';
+import { ClientUpdater } from './ClientUpdater';
 
 const generateClassesString = (classes: string[]): string => {
 	let output = '';
@@ -27,21 +27,16 @@ const getFilteredClients = (filter: string, clients: Client[]) => {
 	return clients.filter((client) => client.email.includes(filter));
 };
 
-export const ClientsTable = () => {
-	const { deleteClientById } = useClientActions();
+interface Props {
+	setToDelete: (value: string[]) => void;
+}
+
+export const ClientsTable: React.FC<Props> = ({ setToDelete }: Props) => {
 	const clients = useAppSelector((state) => state.clients);
 	const [filter, setFilter] = useState('');
-	const [edit, setEdit] = useState(false);
+	const [updating, setUpdating] = useState('');
 
 	const filteredClients = getFilteredClients(filter, clients);
-
-	const handleEdit = () => {
-		// continue here
-	};
-
-	const handleDelete = async (id: string) => {
-		await deleteClientById(id);
-	};
 
 	return (
 		<>
@@ -66,22 +61,34 @@ export const ClientsTable = () => {
 				<TableBody>
 					{filteredClients.map((client) => (
 						<TableRow key={client.id}>
-							{/* edit : (<p>Editting...</p>) ? (<p></p>) */}
-							<TableCell>{client.id}</TableCell>
-							<TableCell>{client.email}</TableCell>
-							<TableCell>{client.name}</TableCell>
-							<TableCell>{client.surname}</TableCell>
-							<TableCell>{client.payment}</TableCell>
-							<TableCell className="text-right">
-								{generateClassesString(client.classes)}
-							</TableCell>
-							<TableCell className="text-right">
-								<i className="bi bi-pencil-square" onClick={handleEdit}></i>
-								<i
-									className="bi bi-trash"
-									onClick={() => void handleDelete(client.id)}
-								></i>
-							</TableCell>
+							{updating == client.id ? (
+								<>
+									<ClientUpdater client={client} setUpdating={setUpdating} />
+								</>
+							) : (
+								<>
+									<TableCell>{client.id}</TableCell>
+									<TableCell>{client.email}</TableCell>
+									<TableCell>{client.name}</TableCell>
+									<TableCell>{client.surname}</TableCell>
+									<TableCell>{client.payment}</TableCell>
+									<TableCell className="text-right">
+										{generateClassesString(client.classes)}
+									</TableCell>
+									<TableCell className="text-right">
+										<i
+											className="bi bi-pencil-square"
+											onClick={() => {
+												setUpdating(client.id);
+											}}
+										></i>
+										<i
+											className="bi bi-trash"
+											onClick={() => setToDelete([client.id, client.email])}
+										></i>
+									</TableCell>
+								</>
+							)}
 						</TableRow>
 					))}
 				</TableBody>

@@ -19,13 +19,13 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 	const { getClasses } = useClassesActions();
 	const { createNewClient } = useClientActions();
 
-	const getAllClasses = async () => {
-		setloadingClasses(true);
-		await getClasses();
-		setloadingClasses(false);
-	};
-
 	useEffect(() => {
+		const getAllClasses = async () => {
+			setloadingClasses(true);
+			await getClasses();
+			setloadingClasses(false);
+		};
+
 		void getAllClasses();
 	}, []);
 
