@@ -10,10 +10,13 @@
 .sidebar h1 {
 	text-transform: uppercase;
 	text-align: center;
-	margin: 20px 0px;
 	font-size: 1.5em;
 	font-weight: bold;
 	color: white;
+}
+
+.sidebar img {
+	margin: 15px auto 0px auto;
 }
 
 .sidebar ul {
@@ -53,6 +56,14 @@
 	bottom: 0px;
 }
 
-.sidebar .user-box * {
+.sidebar .user-box p {
+	width: 100%;
+	color: white;
+}
+
+.sidebar .user-box svg {
+	margin: 0 auto;
+	height: 35px;
+	cursor: pointer;
 	color: white;
 }

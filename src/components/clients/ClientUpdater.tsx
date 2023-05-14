@@ -30,14 +30,11 @@ export const ClientUpdater: React.FC<Props> = ({
 			await getClasses();
 		};
 
-		void getAllClasses();
-		setNewClasses(client.classes);
+		if (classes.length == 0) void getAllClasses();
 	}, []);
 
 	const handleSubmit = () => {
 		const update = async (updatedClient: Client) => {
-			console.log('entraaaa');
-
 			const res = await updateClient(updatedClient);
 
 			if (res == 'ok') setUpdating('');
@@ -102,7 +99,7 @@ export const ClientUpdater: React.FC<Props> = ({
 					</TableCell>
 					<TableCell className="text-right">
 						<MultiSelectBox
-							value={newClasses}
+							value={[...newClasses]}
 							onValueChange={setNewClasses}
 							className="select-classes"
 						>

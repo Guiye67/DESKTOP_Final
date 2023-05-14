@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLoginActions } from '../../hooks/useLoginActions';
 import { Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { TextInput } from '@tremor/react';
 
 export const LoginForm = () => {
 	const [passwordShown, setPasswordShown] = useState(false);
@@ -9,14 +10,11 @@ export const LoginForm = () => {
 	const { login } = useLoginActions();
 	const navigate = useNavigate();
 
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const form = event.currentTarget;
-		const formData = new FormData(form);
-
-		const email = formData.get('email') as string;
-		const password = formData.get('password') as string;
-
+	const doLogin = async (
+		email: string,
+		password: string,
+		form: EventTarget & HTMLFormElement
+	) => {
 		const loginResult = await login(email, password);
 
 		if (loginResult != 'ok') {
@@ -31,29 +29,34 @@ export const LoginForm = () => {
 		}, 3000);
 	};
 
-	const togglePassword = () => {
-		setPasswordShown(!passwordShown);
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const form = event.currentTarget;
+		const formData = new FormData(form);
+
+		const email = formData.get('email') as string;
+		const password = formData.get('password') as string;
+
+		void doLogin(email, password, form);
 	};
 
 	return (
 		<>
-			{/*eslint-disable-next-line @typescript-eslint/no-misused-promises*/}
 			<form onSubmit={handleSubmit} method="post">
-				<p>
-					<label htmlFor="email">Email:</label>
-					<br />
-					<input type="text" name="email" />
-				</p>
-				<p>
-					<label htmlFor="password">Password:</label>
-					<br />
-					<input type={passwordShown ? 'text' : 'password'} name="password" />
-					<i
-						className={passwordShown ? 'bi-eye' : 'bi bi-eye-slash'}
-						id="togglePassword"
-						onClick={togglePassword}
-					></i>
-				</p>
+				<label htmlFor="email">Email:</label>
+				<TextInput type="text" name="email" placeholder="" />
+				<label htmlFor="password">Password:</label>
+				<i
+					className={passwordShown ? 'bi-eye' : 'bi bi-eye-slash'}
+					id="togglePassword"
+					onClick={() => setPasswordShown(!passwordShown)}
+				></i>
+
+				<TextInput
+					type={passwordShown ? 'text' : 'password'}
+					name="password"
+					placeholder=""
+				/>
 
 				<button type="submit">Log In</button>
 			</form>

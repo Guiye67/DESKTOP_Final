@@ -101,15 +101,18 @@
 	margin-right: 12px;
 	padding: 0px 3px;
 	border-radius: 5px;
+	color: white;
 }
 
 .clients-page .bi-x {
 	background-color: rgb(255, 44, 44);
 	padding: 0px 3px;
 	border-radius: 5px;
+	color: white;
 }
 
-.clients-page .bi-check2::before, .clients-page .bi-x::before {
+.clients-page .bi-check2::before,
+.clients-page .bi-x::before {
 	padding-bottom: 2px;
 }
 
@@ -130,11 +133,15 @@
 	width: 100%;
 }
 
-.clients-page .tremor-TableRow-row .tremor-MultiSelectBox-root button, .clients-page .tremor-TableRow-row .tremor-MultiSelectBox-root input {
+.clients-page .tremor-TableRow-row .tremor-MultiSelectBox-root button,
+.clients-page .tremor-TableRow-row .tremor-MultiSelectBox-root input {
 	padding: 1px 2px;
 }
 
-.clients-page .tremor-TableRow-row .tremor-MultiSelectBox-root [type='checkbox'] {
+.clients-page
+	.tremor-TableRow-row
+	.tremor-MultiSelectBox-root
+	[type='checkbox'] {
 	margin: 0px 5px;
 	width: 20px;
 }

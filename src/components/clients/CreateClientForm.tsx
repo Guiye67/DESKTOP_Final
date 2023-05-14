@@ -1,4 +1,9 @@
-import { Card, MultiSelectBox, MultiSelectBoxItem } from '@tremor/react';
+import {
+	Card,
+	MultiSelectBox,
+	MultiSelectBoxItem,
+	TextInput,
+} from '@tremor/react';
 import { useState, useEffect } from 'react';
 import { ClientNew } from '../../models/Client';
 import { useClientActions } from '../../hooks/useClientsActions';
@@ -26,7 +31,7 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 			setloadingClasses(false);
 		};
 
-		void getAllClasses();
+		if (classes.length == 0) void getAllClasses();
 	}, []);
 
 	const createClient = async (
@@ -84,13 +89,13 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 									<label htmlFor="email">Email:</label>
 								</td>
 								<td>
-									<input name="email" type="text" />
+									<TextInput name="email" type="text" />
 								</td>
 								<td>
 									<label htmlFor="password">Password:</label>
 								</td>
 								<td>
-									<input name="password" type="password" />
+									<TextInput name="password" type="password" />
 								</td>
 							</tr>
 							<tr>
@@ -98,13 +103,13 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 									<label htmlFor="name">Name:</label>
 								</td>
 								<td>
-									<input name="name" type="text" />
+									<TextInput name="name" type="text" />
 								</td>
 								<td>
 									<label htmlFor="surname">Surname:</label>
 								</td>
 								<td>
-									<input name="surname" type="text" />
+									<TextInput name="surname" type="text" />
 								</td>
 							</tr>
 							<tr>

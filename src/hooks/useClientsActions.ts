@@ -31,7 +31,7 @@ export const useClientActions = () => {
 
 	const updateClient = async (updatedClient: Client): Promise<string> => {
 		const result = await UpdateClient(updatedClient, token);
-		console.log(`---${result}`);
+
 		if (result == 'ok') void getClients();
 
 		return result;

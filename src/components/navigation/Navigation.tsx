@@ -6,7 +6,13 @@ export const Navigation = () => {
 	return (
 		<>
 			<div className="sidebar">
+				<img
+					src="/gymyang_logo.png"
+					alt="Gym&Yang Logo"
+					style={{ width: '50px', height: '50px' }}
+				/>
 				<h1>Gym & Yang</h1>
+
 				<ul>
 					<NavLink to="/clients">
 						<li>Clients</li>

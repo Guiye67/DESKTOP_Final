@@ -1,0 +1,39 @@
+.classes-page {
+	padding: 5%;
+}
+
+.classes-page h1 {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.classes-page .title {
+	position: relative;
+}
+
+.classes-page .title button {
+	background-color: var(--color-purple);
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	position: absolute;
+	right: 0;
+	bottom: 5px;
+}
+
+.classes-page .title button:hover {
+	background-color: var(--color-dark-purple);
+}
+
+.classes-page .bi-pencil-square {
+	margin-right: 17px;
+}
+
+.classes-page .bi-trash {
+	margin-right: 3px;
+}
+
+.classes-page i {
+	cursor: pointer;
+	font-size: larger;
+}
