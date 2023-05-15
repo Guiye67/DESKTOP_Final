@@ -2,38 +2,44 @@
 	padding: 5%;
 }
 
-.classes-page h1 {
-	font-size: 2em;
-	font-weight: bold;
+.classes-page .tremor-TableCell-root input {
+	min-width: 50px;
 }
 
-.classes-page .title {
-	position: relative;
+.classes-page .tremor-TableRow-row .tremor-MultiSelectBox-root button,
+.classes-page .tremor-TableRow-row .tremor-MultiSelectBox-root input {
+	padding: 3px 5px;
 }
 
-.classes-page .title button {
-	background-color: var(--color-purple);
-	color: white;
-	padding: 5px 10px;
-	border-radius: 5px;
-	position: absolute;
-	right: 0;
-	bottom: 5px;
+.classes-page .tremor-TableRow-row .select-box-cell button,
+.classes-page .tremor-TableRow-row .tremor-SelectBox-root input {
+	padding: 1px 2px;
 }
 
-.classes-page .title button:hover {
-	background-color: var(--color-dark-purple);
+.classes-page .tremor-TableRow-row .tremor-MultiSelectBox-root [type='checkbox'] {
+	margin: 0px 5px;
+	width: 20px;
 }
 
-.classes-page .bi-pencil-square {
-	margin-right: 17px;
+.classes-page .tremor-TableRow-row .tremor-SelectBox-input {
+	padding: 0px;
 }
 
-.classes-page .bi-trash {
-	margin-right: 3px;
+.classes-page .tremor-SelectBox-root svg {
+	margin: 0px;
 }
 
-.classes-page i {
-	cursor: pointer;
-	font-size: larger;
+.classes-page .select-box {
+	width: 80px;
+	min-width: 80px;
+	display: inline-block;
+}
+
+.classes-page .day-buttons button,
+.classes-page .day-buttons button:hover,
+.classes-page .day-buttons .focus\:ring-2:focus {
+	cursor: default;
+	border-width: 0px;
+	background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+	--tw-ring-shadow: none;
 }

@@ -1,4 +1,5 @@
 import {
+	Button,
 	Card,
 	MultiSelectBox,
 	MultiSelectBoxItem,
@@ -51,7 +52,7 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 			form.reset();
 			setTimeout(() => {
 				setCreating(false);
-			}, 1000);
+			}, 1500);
 		}
 	};
 
@@ -138,26 +139,21 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 							</tr>
 							<tr>
 								<td colSpan={4} className="btns-cell">
-									<button id="create-btn" type="submit">
+									<Button id="create-btn" type="submit" loading={loading}>
 										Create
-									</button>
-									<button
+									</Button>
+									<Button
 										id="cancel-btn"
 										type="reset"
 										onClick={() => setCreating(false)}
 									>
 										Cancel
-									</button>
+									</Button>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</form>
-				{loading && (
-					<Alert severity="info" className="alert">
-						Loading...
-					</Alert>
-				)}
 				{!loading && result != '' && result != 'ok' && (
 					<Alert severity="error" className="alert">
 						Error: {result}

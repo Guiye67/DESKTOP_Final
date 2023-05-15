@@ -10,9 +10,12 @@ export const classesSlice = createSlice({
 		setClasses: (_state, action: PayloadAction<Class[]>) => {
 			return action.payload;
 		},
+		deleteClass: (state, action: PayloadAction<string>) => {
+			return state.filter((item) => item.id != action.payload);
+		},
 	},
 });
 
 export default classesSlice.reducer;
 
-export const { setClasses } = classesSlice.actions;
+export const { setClasses, deleteClass } = classesSlice.actions;

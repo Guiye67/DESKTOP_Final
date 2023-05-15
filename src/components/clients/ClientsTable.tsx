@@ -24,7 +24,9 @@ const generateClassesString = (classes: string[]): string => {
 
 const getFilteredClients = (filter: string, clients: Client[]) => {
 	if (!filter) return clients;
-	return clients.filter((client) => client.email.includes(filter));
+	return clients.filter((client) =>
+		client.email.toLowerCase().includes(filter.toLowerCase())
+	);
 };
 
 interface Props {

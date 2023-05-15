@@ -1,6 +1,11 @@
-import { Class } from '../models/Class';
-import { GetAllClasses } from '../services/ClassesCalls';
-import { setClasses } from '../store/classes/slice';
+import { Class, ClassNew } from '../models/Class';
+import {
+	CreateClass,
+	DeleteClass,
+	GetAllClasses,
+	UpdateClass,
+} from '../services/ClassesCalls';
+import { deleteClass, setClasses } from '../store/classes/slice';
 import { useAppDispatch, useAppSelector } from './store';
 
 export const useClassesActions = () => {
@@ -16,5 +21,27 @@ export const useClassesActions = () => {
 		return 'ok';
 	};
 
-	return { getClasses };
+	const createNewClass = async (newClass: ClassNew): Promise<string> => {
+		const result = await CreateClass(newClass, token);
+
+		if (result == 'ok') void getClasses();
+
+		return result;
+	};
+
+	const updateClass = async (updatedClass: Class): Promise<string> => {
+		const result = await UpdateClass(updatedClass, token);
+
+		if (result == 'ok') void getClasses();
+
+		return result;
+	};
+
+	const deleteClassById = async (id: string): Promise<void> => {
+		const result = await DeleteClass(id, token);
+
+		if (result == 'ok') dispatch(deleteClass(id));
+	};
+
+	return { getClasses, createNewClass, updateClass, deleteClassById };
 };

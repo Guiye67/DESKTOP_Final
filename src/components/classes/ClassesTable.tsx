@@ -12,12 +12,14 @@ import { useAppSelector } from '../../hooks/store';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { Class } from '../../models/Class';
-
-const days = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri'];
+import { WEEK_DAYS } from '../../utils/constants/constants';
+import { ClassUpdater } from './ClassUpdater';
 
 const getFilteredClasses = (filter: string, classes: Class[]) => {
 	if (!filter) return classes;
-	return classes.filter((item) => item.name.includes(filter));
+	return classes.filter((item) =>
+		item.name.toLowerCase().includes(filter.toLowerCase())
+	);
 };
 
 interface Props {
@@ -42,7 +44,7 @@ export const ClassesTable: React.FC<Props> = ({ setToDelete }: Props) => {
 				<TableHead>
 					<TableRow>
 						<TableHeaderCell>Name</TableHeaderCell>
-						<TableHeaderCell>Days</TableHeaderCell>
+						<TableHeaderCell className="text-center">Days</TableHeaderCell>
 						<TableHeaderCell>Hour</TableHeaderCell>
 						<TableHeaderCell>Duration</TableHeaderCell>
 						<TableHeaderCell>Signed Up</TableHeaderCell>
@@ -53,15 +55,15 @@ export const ClassesTable: React.FC<Props> = ({ setToDelete }: Props) => {
 				<TableBody>
 					{filteredClasses.map((item) => (
 						<TableRow key={item.id}>
-							{
-								/* updating == item.id ? (
+							{updating == item.id ? (
 								<>
-									<ClientUpdater client={client} setUpdating={setUpdating} />
+									<ClassUpdater item={item} setUpdating={setUpdating} />
 								</>
-							) : */ <>
+							) : (
+								<>
 									<TableCell>{item.name}</TableCell>
-									<TableCell>
-										{days.map((day, index) => (
+									<TableCell className="day-buttons text-center">
+										{WEEK_DAYS.map((day, index) => (
 											<Button
 												key={index}
 												size="xs"
@@ -88,7 +90,7 @@ export const ClassesTable: React.FC<Props> = ({ setToDelete }: Props) => {
 										></i>
 									</TableCell>
 								</>
-							}
+							)}
 						</TableRow>
 					))}
 				</TableBody>

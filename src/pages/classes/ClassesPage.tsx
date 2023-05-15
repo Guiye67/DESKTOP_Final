@@ -4,9 +4,10 @@ import { Button, Card } from '@tremor/react';
 import { Alert } from '@mui/material';
 import { useClassesActions } from '../../hooks/useClassesActions';
 import { ClassesTable } from '../../components/classes/ClassesTable';
+import { CreateClassForm } from '../../components/classes/CreateClassForm';
 
 export default function ClassesPage() {
-	const { getClasses } = useClassesActions();
+	const { getClasses, deleteClassById } = useClassesActions();
 
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState('ok');
@@ -22,13 +23,18 @@ export default function ClassesPage() {
 		void getAllClasses();
 	}, []);
 
+	const handleDelete = () => {
+		void deleteClassById(toDelete[0]);
+		setToDelete(['']);
+	};
+
 	return (
 		<div className="classes-page">
 			<div className="title">
 				<h1>Classes</h1>
-				<button>Create New</button>
+				<button onClick={() => setCreating(true)}>Create New</button>
 			</div>
-			{/* creating && <CreateClientForm setCreating={setCreating} /> */}
+			{creating && <CreateClassForm setCreating={setCreating} />}
 			<Card>
 				{loading && <p>Loading...</p>}
 				{result != 'ok' && (
@@ -39,7 +45,7 @@ export default function ClassesPage() {
 				{!loading && <ClassesTable setToDelete={setToDelete} />}
 			</Card>
 
-			{/* toDelete[0] != '' && (
+			{toDelete[0] != '' && (
 				<Alert
 					id="confirmation-alert"
 					severity="warning"
@@ -61,8 +67,7 @@ export default function ClassesPage() {
 				>
 					You are about to delete <strong>{toDelete[1]}</strong> class
 				</Alert>
-			) */}
+			)}
 		</div>
 	);
 }
-// onClick={() => setCreating(true)}

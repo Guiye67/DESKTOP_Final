@@ -10,15 +10,6 @@ export const clientsSlice = createSlice({
 		setClients: (_state, action: PayloadAction<Client[]>) => {
 			return action.payload;
 		},
-		updateClient: (state, action: PayloadAction<Client>) => {
-			const clientIndex = state.findIndex(
-				(client) => client.id == action.payload.id
-			);
-			return {
-				...state,
-				...(state[clientIndex] = action.payload),
-			};
-		},
 		deleteClient: (state, action: PayloadAction<string>) => {
 			return state.filter((client) => client.id != action.payload);
 		},
@@ -27,4 +18,4 @@ export const clientsSlice = createSlice({
 
 export default clientsSlice.reducer;
 
-export const { setClients, updateClient, deleteClient } = clientsSlice.actions;
+export const { setClients, deleteClient } = clientsSlice.actions;

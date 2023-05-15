@@ -15,3 +15,11 @@ export interface ClassResponse {
 	duration: string;
 	signedUp: string[];
 }
+
+export interface ClassNew {
+	name: string;
+	days: string[];
+	hour: string;
+	duration: string;
+	signedUp: string[];
+}
