@@ -8,7 +8,7 @@ import {
 import { deleteClient, setClients } from '../store/clients/slice';
 import { useAppDispatch, useAppSelector } from './store';
 
-export const useClientActions = () => {
+export const useClientsActions = () => {
 	const dispatch = useAppDispatch();
 	const token = useAppSelector((state) => state.login.token);
 

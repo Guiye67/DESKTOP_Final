@@ -68,7 +68,11 @@ export const ClassesTable: React.FC<Props> = ({ setToDelete }: Props) => {
 												key={index}
 												size="xs"
 												disabled={!item.days.includes(day) && true}
-												style={{ marginRight: '2px', width: '50px' }}
+												style={{
+													marginRight: '2px',
+													width: '50px',
+													backgroundColor: 'rgb(121, 81, 168)',
+												}}
 											>
 												{day}
 											</Button>

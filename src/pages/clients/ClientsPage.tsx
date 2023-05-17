@@ -3,11 +3,11 @@ import { ClientsTable } from '../../components/clients/ClientsTable';
 import '../../styles/ClientsPage.css';
 import { Button, Card } from '@tremor/react';
 import { CreateClientForm } from '../../components/clients/CreateClientForm';
-import { useClientActions } from '../../hooks/useClientsActions';
+import { useClientsActions } from '../../hooks/useClientsActions';
 import { Alert } from '@mui/material';
 
 export default function ClientsPage() {
-	const { deleteClientById, getClients } = useClientActions();
+	const { deleteClientById, getClients } = useClientsActions();
 
 	const [loading, setLoading] = useState(false);
 	const [result, setResult] = useState('ok');
@@ -35,7 +35,7 @@ export default function ClientsPage() {
 				<button onClick={() => setCreating(true)}>Create New</button>
 			</div>
 			{creating && <CreateClientForm setCreating={setCreating} />}
-			<Card>
+			<Card style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}>
 				{loading && <p>Loading...</p>}
 				{result != 'ok' && (
 					<>

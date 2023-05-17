@@ -7,7 +7,7 @@ import {
 } from '@tremor/react';
 import { useState, useEffect } from 'react';
 import { ClientNew } from '../../models/Client';
-import { useClientActions } from '../../hooks/useClientsActions';
+import { useClientsActions } from '../../hooks/useClientsActions';
 import { useClassesActions } from '../../hooks/useClassesActions';
 import { Alert } from '@mui/material';
 import { useAppSelector } from '../../hooks/store';
@@ -23,7 +23,7 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 	const classes = useAppSelector((state) => state.classes);
 	const [clientClasses, setClientClasses] = useState<string[]>([]);
 	const { getClasses } = useClassesActions();
-	const { createNewClient } = useClientActions();
+	const { createNewClient } = useClientsActions();
 
 	useEffect(() => {
 		const getAllClasses = async () => {

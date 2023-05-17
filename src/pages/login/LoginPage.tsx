@@ -16,6 +16,7 @@ export default function LoginPage() {
 		<>
 			<div className="login">
 				<div className="login-box">
+					<img src="/gymyang_logo.png" alt="Gym&Yang Logo" />
 					<h1>Welcome!!</h1>
 					<h2>Please Log In</h2>
 					<LoginForm />
