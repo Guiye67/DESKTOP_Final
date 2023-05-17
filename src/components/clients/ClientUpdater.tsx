@@ -3,7 +3,7 @@ import { Client } from '../../models/Client';
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../hooks/store';
 import { useClassesActions } from '../../hooks/useClassesActions';
-import { useClientActions } from '../../hooks/useClientsActions';
+import { useClientsActions } from '../../hooks/useClientsActions';
 import { Alert } from '@mui/material';
 
 interface Props {
@@ -17,7 +17,7 @@ export const ClientUpdater: React.FC<Props> = ({
 }: Props) => {
 	const classes = useAppSelector((state) => state.classes);
 	const { getClasses } = useClassesActions();
-	const { updateClient } = useClientActions();
+	const { updateClient } = useClientsActions();
 	const [email, setEmail] = useState(client.email);
 	const [name, setName] = useState(client.name);
 	const [surname, setSurname] = useState(client.surname);

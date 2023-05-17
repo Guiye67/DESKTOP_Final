@@ -1,3 +1,4 @@
+import '../../styles/PostsPage.css';
 import { Button, Card } from '@tremor/react';
 import { usePostsActions } from '../../hooks/usePostsActions';
 import { useState, useEffect } from 'react';

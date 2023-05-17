@@ -19,3 +19,147 @@
 	overflow: hidden;
 	background-color: var(--color-purple);
 }
+
+.content h1 {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.content .title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.content .title h1 {
+	width: 220px;
+	display: inline;
+	background: 
+		linear-gradient(to bottom right, transparent 50%, white 50%) no-repeat,
+		linear-gradient(to top right, transparent 0.1%, white 0.1%) no-repeat,
+		linear-gradient(to bottom left, transparent 50%, white 50%) no-repeat;
+	background-size: 21px 100%, 180px 100%, 20px 100%;
+	background-position: -1px 0%, 20px 0%, 200px 0%;
+	text-align: center;
+	z-index: 99;
+	color: var(--color-dark-purple);
+}
+
+.content .title button {
+	background-color: var(--color-purple);
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	min-width: 120px;
+}
+
+.content .title button:hover {
+	background-color: var(--color-dark-purple);
+}
+
+.content .create-card {
+	margin-bottom: 5px;
+	padding-bottom: 15px;
+}
+
+.content .create-card table {
+	margin: 0 auto;
+}
+
+.content .create-card form table tr td {
+	padding: 5px 5px;
+}
+
+.content .create-card p {
+	font-size: larger;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.content .create-card label {
+	font-size: large;
+}
+
+.content .create-card form input {
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.content .btns-cell {
+	text-align: center;
+}
+
+.content #cancel-btn {
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 5px 15px;
+	border-radius: 5px;
+	background-color: rgb(220, 0, 0);
+	color: white;
+}
+
+.content #cancel-btn:hover {
+	background-color: rgb(180, 0, 0);
+}
+
+.content #create-btn {
+	margin-right: 10px;
+	margin-top: 10px;
+	padding: 5px 15px;
+	border-radius: 5px;
+	background-color: rgb(0, 160, 0);
+	color: white;
+}
+
+.content #create-btn:hover {
+	background-color: green;
+}
+
+.content .bi-pencil-square {
+	margin-right: 17px;
+}
+
+.content .bi-trash {
+	margin-right: 3px;
+}
+
+.content i {
+	cursor: pointer;
+	font-size: larger;
+}
+
+.content .bi-check2 {
+	background-color: rgb(0, 215, 0);
+	margin-right: 12px;
+	padding: 0px 3px;
+	border-radius: 5px;
+	color: white;
+}
+
+.content .bi-x {
+	background-color: rgb(255, 44, 44);
+	padding: 0px 3px;
+	border-radius: 5px;
+	color: white;
+}
+
+.content .bi-check2::before,
+.content .bi-x::before {
+	padding-bottom: 2px;
+}
+
+.content #confirmation-alert {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+}
+
+.content .tremor-TableCell-root input {
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 100%;
+}
+
+.content .tremor-Button-root {
+	border: none;
+}

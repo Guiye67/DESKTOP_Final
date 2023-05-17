@@ -1,7 +1,12 @@
+import '../../styles/Suggestions.css';
+
 export default function SuggestionsPage() {
 	return (
-		<>
-			<h1>Suggestions Page</h1>
-		</>
+		<div className="suggestions-page">
+			<div className="title">
+				<h1>Suggestions</h1>
+				<button>Create New</button>
+			</div>
+		</div>
 	);
 }
