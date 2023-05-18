@@ -3,6 +3,9 @@ import { Button, Card } from '@tremor/react';
 import { usePostsActions } from '../../hooks/usePostsActions';
 import { useState, useEffect } from 'react';
 import { Alert } from '@mui/material';
+import { PostsTable } from '../../components/posts/PostsTable';
+import { Post } from '../../models/Post';
+import { PostUpdater } from '../../components/posts/PostUpdater';
 
 export default function PostsPage() {
 	const { deletePostById, getPosts } = usePostsActions();
@@ -11,6 +14,7 @@ export default function PostsPage() {
 	const [result, setResult] = useState('ok');
 	const [creating, setCreating] = useState(false);
 	const [toDelete, setToDelete] = useState(['']);
+	const [toUpdate, setToUpdate] = useState<Post | null>();
 
 	useEffect(() => {
 		const getAllPosts = async () => {
@@ -33,14 +37,25 @@ export default function PostsPage() {
 				<button onClick={() => setCreating(true)}>Create New</button>
 			</div>
 			{/* creating && <CreateClientForm setCreating={setCreating} /> */}
-			<Card style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}>
+			<Card
+				style={
+					creating
+						? { borderRadius: '0.5rem' }
+						: { borderRadius: '0 0.5rem 0.5rem 0.5rem' }
+				}
+			>
 				{loading && <p>Loading...</p>}
 				{result != 'ok' && (
 					<>
 						<p style={{ color: 'red' }}>Error Fetching Data: ({result})</p>
 					</>
 				)}
-				{/* !loading && <ClientsTable setToDelete={setToDelete} /> */}
+				{!loading && toUpdate == null && (
+					<PostsTable setToDelete={setToDelete} setToUpdate={setToUpdate} />
+				)}
+				{!loading && toUpdate != null && (
+					<PostUpdater post={toUpdate} setToUpdate={setToUpdate} />
+				)}
 			</Card>
 
 			{toDelete[0] != '' && (

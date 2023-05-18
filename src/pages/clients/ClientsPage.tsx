@@ -35,7 +35,13 @@ export default function ClientsPage() {
 				<button onClick={() => setCreating(true)}>Create New</button>
 			</div>
 			{creating && <CreateClientForm setCreating={setCreating} />}
-			<Card style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}>
+			<Card
+				style={
+					creating
+						? { borderRadius: '0.5rem' }
+						: { borderRadius: '0 0.5rem 0.5rem 0.5rem' }
+				}
+			>
 				{loading && <p>Loading...</p>}
 				{result != 'ok' && (
 					<>

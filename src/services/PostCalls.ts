@@ -63,6 +63,30 @@ export const CreatePost = (newPost: PostNew, token: string) => {
 	);
 };
 
+export const UploadImage = (image: File, id: string, token: string) => {
+	const data = new FormData();
+	data.append('image', image);
+
+	const requestOptions: RequestInit = {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer: ${token}`,
+		},
+		body: data,
+	};
+
+	return fetch(`http://localhost:8080/posts/img/${id}`, requestOptions).then(
+		async (response) => {
+			if (response.status != 200) {
+				const err: CallError = (await response.json()) as CallError;
+				return err.message;
+			}
+
+			return 'ok';
+		}
+	);
+};
+
 export const UpdatePost = (updatedPost: Post, token: string) => {
 	const requestOptions: RequestInit = {
 		method: 'PUT',

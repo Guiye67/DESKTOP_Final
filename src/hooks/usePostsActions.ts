@@ -4,6 +4,7 @@ import {
 	DeletePost,
 	GetAllPosts,
 	UpdatePost,
+	UploadImage,
 } from '../services/PostCalls';
 import { deletePost, setPosts } from '../store/posts/slice';
 import { useAppDispatch, useAppSelector } from './store';
@@ -29,6 +30,14 @@ export const usePostsActions = () => {
 		return result;
 	};
 
+	const uploadImage = async (image: File, id: string): Promise<string> => {
+		const result = await UploadImage(image, id, token);
+
+		if (result == 'ok') void getPosts();
+
+		return result;
+	};
+
 	const updatePost = async (updatedPost: Post): Promise<string> => {
 		const result = await UpdatePost(updatedPost, token);
 
@@ -43,5 +52,5 @@ export const usePostsActions = () => {
 		if (result == 'ok') dispatch(deletePost(id));
 	};
 
-	return { getPosts, createNewPost, updatePost, deletePostById };
+	return { getPosts, createNewPost, updatePost, deletePostById, uploadImage };
 };

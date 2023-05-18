@@ -1,3 +1,44 @@
 .posts-page {
 	padding: 5%;
 }
+
+.posts-page #small-image {
+	border-radius: 50px;
+	object-fit: cover;
+  width: 50px;
+  height: 50px;
+	min-width: 50px;
+}
+
+.posts-page .updater-buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.posts-page .updater-buttons button:nth-child(2) {
+	background: rgb(0, 190, 0);
+}
+
+.posts-page .updater-buttons button:nth-child(2):hover {
+	background: rgb(0, 160, 0);
+}
+
+.posts-page .updater-buttons button:first-child {
+	background: rgb(230, 0, 0);
+	color: white;
+	box-shadow: none;
+}
+
+.posts-page .updater-buttons button:first-child:hover {
+	background: rgb(200, 0, 0);
+}
+
+.posts-page .updater-form .tremor-Table-root {
+	padding: 10px 10%;
+}
+
+.posts-page .updater-form #file {
+	padding: 5px 4px;
+}
