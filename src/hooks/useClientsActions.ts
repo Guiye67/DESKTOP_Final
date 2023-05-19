@@ -15,6 +15,7 @@ export const useClientsActions = () => {
 	const getClients = async (): Promise<string> => {
 		const clients: Client[] = await GetAllClients(token);
 
+		if (clients.length == 0) return 'No clients found in database';
 		if (clients[0].id == '-1') return clients[0].email;
 
 		dispatch(setClients(clients));

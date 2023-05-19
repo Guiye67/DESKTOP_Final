@@ -92,8 +92,7 @@ export default function PostsPage() {
 						</>
 					}
 				>
-					You are about to delete client with email:{' '}
-					<strong>{toDelete[1]}</strong>
+					You are about to delete post <strong>{toDelete[1]}</strong>
 				</Alert>
 			)}
 		</div>

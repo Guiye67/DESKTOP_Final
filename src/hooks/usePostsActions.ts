@@ -16,6 +16,7 @@ export const usePostsActions = () => {
 	const getPosts = async (): Promise<string> => {
 		const posts: Post[] = await GetAllPosts(token);
 
+		if (posts.length == 0) return 'No posts found in database';
 		if (posts[0].id == '-1') return posts[0].title;
 
 		dispatch(setPosts(posts));

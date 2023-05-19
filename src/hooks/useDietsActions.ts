@@ -15,6 +15,7 @@ export const useDietsActions = () => {
 	const getDiets = async (): Promise<string> => {
 		const diets: Diet[] = await GetAllDiets(token);
 
+		if (diets.length == 0) return 'No diets found in database';
 		if (diets[0].id == '-1') return diets[0].client;
 
 		dispatch(setDiets(diets));

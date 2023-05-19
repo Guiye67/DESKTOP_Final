@@ -15,6 +15,7 @@ export const useSuggestionsActions = () => {
 	const getSuggestions = async (): Promise<string> => {
 		const suggestions: Suggestion[] = await GetAllSuggestions(token);
 
+		if (suggestions.length == 0) return 'No suggestions found in database';
 		if (suggestions[0].id == '-1') return suggestions[0].title;
 
 		dispatch(setSuggestions(suggestions));

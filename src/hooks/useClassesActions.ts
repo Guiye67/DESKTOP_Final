@@ -15,6 +15,7 @@ export const useClassesActions = () => {
 	const getClasses = async (): Promise<string> => {
 		const classes: Class[] = await GetAllClasses(token);
 
+		if (classes.length == 0) return 'No classes found in database';
 		if (classes[0].id == '-1') return classes[0].name;
 
 		dispatch(setClasses(classes));
