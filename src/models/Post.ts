@@ -14,6 +14,16 @@ export interface PostResponse {
 	images: string;
 }
 
+export interface PostCreateResponse {
+	newPost: {
+		_id: string;
+		title: string;
+		muscle: string;
+		description: string;
+		images: string;
+	};
+}
+
 export interface PostNew {
 	title: string;
 	muscle: string;

@@ -6,6 +6,8 @@ import { Alert } from '@mui/material';
 import { PostsTable } from '../../components/posts/PostsTable';
 import { Post } from '../../models/Post';
 import { PostUpdater } from '../../components/posts/PostUpdater';
+import { PostView } from '../../components/posts/PostView';
+import { CreatePostForm } from '../../components/posts/CreatePostForm';
 
 export default function PostsPage() {
 	const { deletePostById, getPosts } = usePostsActions();
@@ -15,6 +17,7 @@ export default function PostsPage() {
 	const [creating, setCreating] = useState(false);
 	const [toDelete, setToDelete] = useState(['']);
 	const [toUpdate, setToUpdate] = useState<Post | null>();
+	const [toView, setToView] = useState<Post | null>();
 
 	useEffect(() => {
 		const getAllPosts = async () => {
@@ -36,7 +39,7 @@ export default function PostsPage() {
 				<h1>Posts</h1>
 				<button onClick={() => setCreating(true)}>Create New</button>
 			</div>
-			{/* creating && <CreateClientForm setCreating={setCreating} /> */}
+			{creating && <CreatePostForm setCreating={setCreating} />}
 			<Card
 				style={
 					creating
@@ -50,11 +53,22 @@ export default function PostsPage() {
 						<p style={{ color: 'red' }}>Error Fetching Data: ({result})</p>
 					</>
 				)}
-				{!loading && toUpdate == null && (
-					<PostsTable setToDelete={setToDelete} setToUpdate={setToUpdate} />
+				{!loading && toUpdate == null && toView == null && (
+					<PostsTable setToDelete={setToDelete} setToView={setToView} />
 				)}
 				{!loading && toUpdate != null && (
-					<PostUpdater post={toUpdate} setToUpdate={setToUpdate} />
+					<PostUpdater
+						post={toUpdate}
+						setToUpdate={setToUpdate}
+						setToView={setToView}
+					/>
+				)}
+				{!loading && toUpdate == null && toView != null && (
+					<PostView
+						post={toView}
+						setToUpdate={setToUpdate}
+						setToView={setToView}
+					/>
 				)}
 			</Card>
 

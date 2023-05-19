@@ -63,8 +63,8 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
-		const name = formData.get('password') as string;
-		const surname = formData.get('password') as string;
+		const name = formData.get('name') as string;
+		const surname = formData.get('surname') as string;
 
 		const newClient: ClientNew = {
 			email,

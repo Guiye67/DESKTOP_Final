@@ -15,16 +15,22 @@ import { CustomTextArea } from '../custom/CustomTextArea';
 
 interface Props {
 	post: Post;
+	setToView: (value: Post | null) => void;
 	setToUpdate: (value: Post | null) => void;
 }
 
-export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
+export const PostUpdater: React.FC<Props> = ({
+	post,
+	setToView,
+	setToUpdate,
+}: Props) => {
 	const { updatePost, uploadImage } = usePostsActions();
 	const [title, setTitle] = useState(post.title);
 	const [muscle, setMuscle] = useState(post.muscle);
 	const [description, setDescription] = useState(post.description);
 	const [result, setResult] = useState('ok');
 	const [newImg, setNewImg] = useState<File | null>(null);
+	const [deleteImg, setDeleteImg] = useState(false);
 
 	const handleFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files ? event.target.files[0] : null;
@@ -37,13 +43,14 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 
 			if (res != 'ok') {
 				setResult(res);
-			} else if (newImg != null) {
+			} else if (newImg != null && !deleteImg) {
 				const res2 = await uploadImage(newImg, post.id);
 
 				if (res2 != 'ok') setResult(res2);
 			}
 
 			setToUpdate(null);
+			setToView(null);
 
 			setTimeout(() => {
 				setResult('ok');
@@ -55,7 +62,7 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 			title,
 			muscle,
 			description,
-			images: post.images,
+			images: deleteImg ? 'default-post-image.png' : post.images,
 		};
 
 		void update(updatedPost);
@@ -63,8 +70,14 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 
 	return (
 		<>
-			<div className="updater-buttons">
-				<Button onClick={() => setToUpdate(null)} icon={ArrowLongLeftIcon}>
+			<div className="posts-nav-buttons">
+				<Button
+					onClick={() => {
+						setToUpdate(null);
+						setToView(null);
+					}}
+					icon={ArrowLongLeftIcon}
+				>
 					Cancel
 				</Button>
 
@@ -80,7 +93,7 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 							<TableBody>
 								<TableRow>
 									<TableCell>
-										<Title>Title: </Title>
+										<Title>Title:</Title>
 										<TextInput
 											type="text"
 											value={title}
@@ -89,7 +102,7 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 										/>
 									</TableCell>
 									<TableCell>
-										<Title>Muscle: </Title>
+										<Title>Muscle:</Title>
 										<TextInput
 											type="text"
 											value={muscle}
@@ -98,7 +111,18 @@ export const PostUpdater: React.FC<Props> = ({ post, setToUpdate }: Props) => {
 										/>
 									</TableCell>
 									<TableCell>
-										<Title>Image: </Title>
+										<div id="file-title">
+											<Title>Image:</Title>
+											<div onClick={() => setDeleteImg(!deleteImg)}>
+												<input
+													type="checkbox"
+													name="deleteImg"
+													checked={deleteImg}
+													readOnly={true}
+												/>{' '}
+												<label htmlFor="deleteImg">Delete image?</label>
+											</div>
+										</div>
 										<input
 											type="file"
 											id="file"

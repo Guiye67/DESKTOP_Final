@@ -1,5 +1,10 @@
 import { CallError } from '../models/CallError';
-import { Post, PostNew, PostResponse } from '../models/Post';
+import {
+	Post,
+	PostCreateResponse,
+	PostNew,
+	PostResponse,
+} from '../models/Post';
 
 export const GetAllPosts = async (token: string) => {
 	const requestOptions: RequestInit = {
@@ -58,7 +63,9 @@ export const CreatePost = (newPost: PostNew, token: string) => {
 				return err.message;
 			}
 
-			return 'ok';
+			const data: PostCreateResponse =
+				(await response.json()) as PostCreateResponse;
+			return `ok-${data.newPost._id}`;
 		}
 	);
 };

@@ -21,16 +21,15 @@ const getFilteredPosts = (filter: string, posts: Post[]) => {
 
 interface Props {
 	setToDelete: (value: string[]) => void;
-	setToUpdate: (value: Post | null) => void;
+	setToView: (value: Post | null) => void;
 }
 
 export const PostsTable: React.FC<Props> = ({
 	setToDelete,
-	setToUpdate,
+	setToView,
 }: Props) => {
 	const posts = useAppSelector((state) => state.posts);
 	const [filter, setFilter] = useState('');
-	const [updating, setUpdating] = useState('');
 
 	const filteredPosts = getFilteredPosts(filter, posts);
 
@@ -67,15 +66,15 @@ export const PostsTable: React.FC<Props> = ({
 							<TableCell>{post.title}</TableCell>
 							<TableCell>{post.muscle}</TableCell>
 							<TableCell className="w-full">
-								{post.description.length > 30
-									? `${post.description.slice(0, 30)}...`
+								{post.description.length > 50
+									? `${post.description.slice(0, 50)}...`
 									: post.description}
 							</TableCell>
 							<TableCell className="text-right">
 								<i
-									className="bi bi-pencil-square"
+									className="bi bi-zoom-in"
 									onClick={() => {
-										setToUpdate(post);
+										setToView(post);
 									}}
 								></i>
 								<i

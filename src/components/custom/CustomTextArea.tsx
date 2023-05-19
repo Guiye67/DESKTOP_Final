@@ -2,12 +2,14 @@ interface TextAreaProps {
 	value: string;
 	onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	placeholder: string;
+	disabled?: boolean;
 }
 
 export const CustomTextArea: React.FC<TextAreaProps> = ({
 	value,
 	onChange,
 	placeholder,
+	disabled,
 }: TextAreaProps) => {
 	return (
 		<textarea
@@ -15,6 +17,7 @@ export const CustomTextArea: React.FC<TextAreaProps> = ({
 			value={value}
 			onChange={onChange}
 			placeholder={placeholder}
+			disabled={disabled}
 		/>
 	);
 };

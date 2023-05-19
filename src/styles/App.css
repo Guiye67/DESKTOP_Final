@@ -80,11 +80,6 @@
 	font-size: large;
 }
 
-.content .create-card form input {
-	border-radius: 5px;
-	border: 1px solid black;
-}
-
 .content .btns-cell {
 	text-align: center;
 }
@@ -116,6 +111,10 @@
 }
 
 .content .bi-pencil-square {
+	margin-right: 17px;
+}
+
+.content .bi-zoom-in {
 	margin-right: 17px;
 }
 

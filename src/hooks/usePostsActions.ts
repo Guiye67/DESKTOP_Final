@@ -25,7 +25,7 @@ export const usePostsActions = () => {
 	const createNewPost = async (newPost: PostNew): Promise<string> => {
 		const result = await CreatePost(newPost, token);
 
-		if (result == 'ok') void getPosts();
+		if (result.split('-')[0] == 'ok') void getPosts();
 
 		return result;
 	};
