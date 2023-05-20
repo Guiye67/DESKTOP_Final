@@ -68,13 +68,18 @@ export const CreateClassForm: React.FC<Props> = ({ setCreating }: Props) => {
 	};
 
 	return (
-		<Card className="create-card">
-			<p>New class form</p>
+		<Card
+			className="create-card"
+			style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}
+		>
+			<p id="create-title">New class form</p>
 			<form onSubmit={handleCreate}>
 				<table>
 					<tbody>
 						<tr>
-							<td>Name:</td>
+							<td>
+								<label>Name:</label>
+							</td>
 							<td>
 								<TextInput name="name" type="text" />
 							</td>
@@ -92,7 +97,9 @@ export const CreateClassForm: React.FC<Props> = ({ setCreating }: Props) => {
 							</td>
 						</tr>
 						<tr>
-							<td>Hour:</td>
+							<td>
+								<label>Hour:</label>
+							</td>
 							<td>
 								<SelectBox
 									value={hour}
@@ -126,7 +133,9 @@ export const CreateClassForm: React.FC<Props> = ({ setCreating }: Props) => {
 							</td>
 						</tr>
 						<tr>
-							<td>Duration:</td>
+							<td>
+								<label>Duration:</label>
+							</td>
 							<td>
 								<TextInput name="duration" type="text" placeholder="E.g. 1h" />
 							</td>

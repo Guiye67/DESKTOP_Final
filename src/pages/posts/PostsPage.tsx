@@ -37,7 +37,7 @@ export default function PostsPage() {
 		<div className="posts-page">
 			<div className="title">
 				<h1>Posts</h1>
-				<button onClick={() => setCreating(true)}>Create New</button>
+				<Button onClick={() => setCreating(true)}>Create New</Button>
 			</div>
 			{creating && <CreatePostForm setCreating={setCreating} />}
 			<Card

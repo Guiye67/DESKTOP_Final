@@ -70,7 +70,7 @@ export const PostUpdater: React.FC<Props> = ({
 
 	return (
 		<>
-			<div className="posts-nav-buttons">
+			<div className="view-nav-buttons">
 				<Button
 					onClick={() => {
 						setToUpdate(null);

@@ -80,7 +80,7 @@ export const CreatePostForm: React.FC<Props> = ({ setCreating }: Props) => {
 				className="create-card"
 				style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}
 			>
-				<p>New post form</p>
+				<p id="create-title">New post form</p>
 				<form onSubmit={handleCreate}>
 					<table>
 						<tbody>

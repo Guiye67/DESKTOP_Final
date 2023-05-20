@@ -9,12 +9,23 @@ import { Badge } from '@tremor/react';
 export const Navigation = () => {
 	const { getSuggestions } = useSuggestionsActions();
 	const suggestions = useAppSelector((state) => state.suggestions);
+	let aux = 0;
 
 	useEffect(() => {
 		const getAllSuggestions = async () => {
 			await getSuggestions();
 		};
-		void getAllSuggestions();
+
+		if (aux == 0) {
+			void getAllSuggestions();
+			aux++;
+		}
+
+		const interval = setInterval(() => {
+			void getAllSuggestions();
+		}, 180000);
+
+		return () => clearInterval(interval);
 	}, []);
 
 	return (

@@ -5,43 +5,9 @@
 .posts-page #small-image {
 	border-radius: 50px;
 	object-fit: cover;
-  width: 50px;
-  height: 50px;
+	width: 50px;
+	height: 50px;
 	min-width: 50px;
-}
-
-.posts-page .posts-nav-buttons {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 10px;
-}
-
-.posts-page .posts-nav-buttons button:nth-child(2) {
-	background: rgb(0, 190, 0);
-}
-
-.posts-page .posts-nav-buttons button:nth-child(2):hover {
-	background: rgb(0, 160, 0);
-}
-
-.posts-page .posts-nav-buttons button:first-child {
-	background: rgb(230, 0, 0);
-	color: white;
-	box-shadow: none;
-}
-
-.posts-page .posts-nav-buttons button:first-child:hover {
-	background: rgb(200, 0, 0);
-}
-
-.posts-page .posts-nav-buttons .bi-pencil-square {
-	margin-right: 0.375rem;
-	margin-left: -0.25rem;
-}
-
-.posts-page .updater-form .tremor-Table-root {
-	padding: 10px 10%;
 }
 
 .posts-page .updater-form #file-title {
@@ -61,14 +27,4 @@
 
 .posts-page .updater-form #file {
 	padding: 5px 4px;
-}
-
-.posts-page .post-view .tremor-Table-root {
-	padding: 10px 10%;
-}
-
-.posts-page .post-view img {
-	margin: 0 auto;
-	border-radius: 10px;
-	box-shadow: 2px 2px 5px darkgray;
 }

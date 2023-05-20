@@ -80,8 +80,11 @@ export const CreateClientForm: React.FC<Props> = ({ setCreating }: Props) => {
 
 	return (
 		<>
-			<Card className="create-card">
-				<p>New client form</p>
+			<Card
+				className="create-card"
+				style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}
+			>
+				<p id="create-title">New client form</p>
 				<form onSubmit={handleCreate}>
 					<table>
 						<tbody>

@@ -2,11 +2,14 @@ import { Button, Card, TextInput } from '@tremor/react';
 import { useSuggestionsActions } from '../../hooks/useSuggestionsActions';
 import { Suggestion } from '../../models/Suggestion';
 import '../../styles/SuggestionsPage.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Alert } from '@mui/material';
 import { SuggestionsTabe } from '../../components/suggestions/SuggestionsTable';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useAppSelector } from '../../hooks/store';
+import { CreateSuggestionForm } from '../../components/suggestions/CreateSuggestionForm';
+import { SuggestionView } from '../../components/suggestions/SuggestionView';
+import { SuggestionUpdater } from '../../components/suggestions/SuggestionUpdater';
 
 const getFilteredSuggestions = (filter: string, suggestions: Suggestion[]) => {
 	if (!filter) return suggestions;
@@ -19,11 +22,10 @@ export default function SuggestionsPage() {
 	const { deleteSuggestionById } = useSuggestionsActions();
 	const suggestions = useAppSelector((state) => state.suggestions);
 
-	const [loading, setLoading] = useState(false);
-	const [result, setResult] = useState('ok');
 	const [creating, setCreating] = useState(false);
 	const [toDelete, setToDelete] = useState(['']);
 	const [toView, setToView] = useState<Suggestion | null>();
+	const [toUpdate, setToUpdate] = useState<Suggestion | null>();
 	const [filter, setFilter] = useState('');
 
 	const filteredSuggestions = getFilteredSuggestions(filter, suggestions);
@@ -37,9 +39,9 @@ export default function SuggestionsPage() {
 		<div className="suggestions-page">
 			<div className="title">
 				<h1>Suggestions</h1>
-				<button>Create New</button>
+				<Button onClick={() => setCreating(true)}>Create New</Button>
 			</div>
-			{/* creating && <CreatePostForm setCreating={setCreating} /> */}
+			{creating && <CreateSuggestionForm setCreating={setCreating} />}
 			<Card
 				style={
 					creating
@@ -47,47 +49,51 @@ export default function SuggestionsPage() {
 						: { borderRadius: '0 0.5rem 0.5rem 0.5rem' }
 				}
 			>
-				{loading && <p>Loading...</p>}
-				{result != 'ok' && (
+				{suggestions.length == 0 && (
 					<>
-						<p style={{ color: 'red' }}>Error Fetching Data: ({result})</p>
+						<p style={{ color: 'red' }}>No suggestions found in database</p>
 					</>
 				)}
-				{!loading && toView == null && (
+				{toView == null && (
 					<>
 						<TextInput
 							icon={MagnifyingGlassIcon}
 							placeholder="Search suggestion..."
 							onChange={(e) => setFilter(e.target.value)}
+							className="mb-2"
 						/>
 						<SuggestionsTabe
 							setToDelete={setToDelete}
 							setToView={setToView}
 							title="Unresolved"
-							suggestions={suggestions.filter((sugg) => !sugg.resolved)}
+							suggestions={filteredSuggestions.filter((sugg) => !sugg.resolved)}
+						/>
+						<hr
+							style={{ borderColor: 'var(--color-dark-purple)' }}
+							className="mb-2 mt-4"
 						/>
 						<SuggestionsTabe
 							setToDelete={setToDelete}
 							setToView={setToView}
 							title="Resolved"
-							suggestions={suggestions.filter((sugg) => sugg.resolved)}
+							suggestions={filteredSuggestions.filter((sugg) => sugg.resolved)}
 						/>
 					</>
 				)}
-				{/* !loading && toUpdate != null && (
-					<PostUpdater
-						post={toUpdate}
+				{toUpdate != null && (
+					<SuggestionUpdater
+						suggestion={toUpdate}
 						setToUpdate={setToUpdate}
 						setToView={setToView}
 					/>
-				) */}
-				{/* !loading && toUpdate == null && toView != null && (
-					<PostView
-						post={toView}
+				)}
+				{toUpdate == null && toView != null && (
+					<SuggestionView
+						suggestion={toView}
 						setToUpdate={setToUpdate}
 						setToView={setToView}
 					/>
-				) */}
+				)}
 			</Card>
 
 			{toDelete[0] != '' && (

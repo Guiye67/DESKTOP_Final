@@ -32,7 +32,7 @@ export default function ClassesPage() {
 		<div className="classes-page">
 			<div className="title">
 				<h1>Classes</h1>
-				<button onClick={() => setCreating(true)}>Create New</button>
+				<Button onClick={() => setCreating(true)}>Create New</Button>
 			</div>
 			{creating && <CreateClassForm setCreating={setCreating} />}
 			<Card

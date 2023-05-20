@@ -32,7 +32,7 @@ export default function ClientsPage() {
 		<div className="clients-page">
 			<div className="title">
 				<h1>Clients</h1>
-				<button onClick={() => setCreating(true)}>Create New</button>
+				<Button onClick={() => setCreating(true)}>Create New</Button>
 			</div>
 			{creating && <CreateClientForm setCreating={setCreating} />}
 			<Card

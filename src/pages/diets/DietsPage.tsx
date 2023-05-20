@@ -1,3 +1,4 @@
+import { Button } from '@tremor/react';
 import '../../styles/DietsPage.css';
 
 export default function DietsPage() {
@@ -5,7 +6,7 @@ export default function DietsPage() {
 		<div className="diets-page">
 			<div className="title">
 				<h1>Diets</h1>
-				<button>Create New</button>
+				<Button>Create New</Button>
 			</div>
 		</div>
 	);

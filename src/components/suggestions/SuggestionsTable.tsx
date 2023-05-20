@@ -25,12 +25,13 @@ export const SuggestionsTabe: React.FC<Props> = ({
 }: Props) => {
 	return (
 		<>
-			<Title>
-				{title}{' '}
+			<div>
+				<Title className="inline mr-2">{title}</Title>
 				{title == 'Unresolved' && suggestions.length > 0 && (
 					<Badge color="red">{suggestions.length}</Badge>
 				)}
-			</Title>
+			</div>
+
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -49,8 +50,8 @@ export const SuggestionsTabe: React.FC<Props> = ({
 							<TableCell>{sugg.title}</TableCell>
 							<TableCell>{sugg.client}</TableCell>
 							<TableCell className="w-full">
-								{sugg.description.length > 50
-									? `${sugg.description.slice(0, 50)}...`
+								{sugg.description.length > 30
+									? `${sugg.description.slice(0, 30)}...`
 									: sugg.description}
 							</TableCell>
 							<TableCell className="text-right">

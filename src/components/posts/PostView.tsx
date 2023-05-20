@@ -24,7 +24,7 @@ export const PostView: React.FC<Props> = ({
 }: Props) => {
 	return (
 		<>
-			<div className="posts-nav-buttons">
+			<div className="view-nav-buttons">
 				<Button onClick={() => setToView(null)} icon={ArrowLongLeftIcon}>
 					Back
 				</Button>
@@ -33,7 +33,7 @@ export const PostView: React.FC<Props> = ({
 					<i className="bi bi-pencil-square"></i>Edit
 				</Button>
 			</div>
-			<div className="post-view">
+			<div className="view-card">
 				<Title>Post ID: {post.id}</Title>
 				<Table>
 					<TableBody>

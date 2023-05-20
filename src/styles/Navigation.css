@@ -59,6 +59,7 @@
 .sidebar .user-box p {
 	width: 100%;
 	color: white;
+	margin-left: 5px;
 }
 
 .sidebar .user-box svg {
