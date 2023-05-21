@@ -5,10 +5,13 @@ import { useEffect } from 'react';
 import { useSuggestionsActions } from '../../hooks/useSuggestionsActions';
 import { useAppSelector } from '../../hooks/store';
 import { Badge } from '@tremor/react';
+import { useDietsActions } from '../../hooks/useDietsActions';
 
 export const Navigation = () => {
 	const { getSuggestions } = useSuggestionsActions();
+	const { getDiets } = useDietsActions();
 	const suggestions = useAppSelector((state) => state.suggestions);
+	const diets = useAppSelector((state) => state.diets);
 	let aux = 0;
 
 	useEffect(() => {
@@ -16,13 +19,19 @@ export const Navigation = () => {
 			await getSuggestions();
 		};
 
+		const getAllDiets = async () => {
+			await getDiets();
+		};
+
 		if (aux == 0) {
 			void getAllSuggestions();
+			void getAllDiets();
 			aux++;
 		}
 
 		const interval = setInterval(() => {
 			void getAllSuggestions();
+			void getAllDiets();
 		}, 180000);
 
 		return () => clearInterval(interval);
@@ -63,7 +72,12 @@ export const Navigation = () => {
 					</NavLink>
 					<hr />
 					<NavLink to="/diets">
-						<li>Diets</li>
+						<li>
+							Diets{' '}
+							{diets.filter((diet) => !diet.resolved).length > 0 && (
+								<Badge>{diets.filter((diet) => !diet.resolved).length}</Badge>
+							)}
+						</li>
 					</NavLink>
 				</ul>
 				<div className="user-box">

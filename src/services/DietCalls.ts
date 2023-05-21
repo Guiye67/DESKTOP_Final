@@ -41,6 +41,7 @@ export const GetAllDiets = async (token: string) => {
 					height: diet.height,
 					objective: diet.objective,
 					allergens: diet.allergens,
+					resolved: diet.resolved,
 				} as Diet);
 			});
 			return output;

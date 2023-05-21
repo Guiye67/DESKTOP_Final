@@ -82,7 +82,7 @@ export const CreateSuggestionForm: React.FC<Props> = ({
 				className="create-card"
 				style={{ borderRadius: '0 0.5rem 0.5rem 0.5rem' }}
 			>
-				<p id="create-title">New client form</p>
+				<p id="create-title">New suggestion form</p>
 				<form onSubmit={handleCreate}>
 					<table>
 						<tbody>

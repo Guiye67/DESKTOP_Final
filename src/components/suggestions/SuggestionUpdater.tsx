@@ -38,13 +38,13 @@ export const SuggestionUpdater: React.FC<Props> = ({
 	const { getClients } = useClientsActions();
 
 	useEffect(() => {
-		const getAllClasses = async () => {
+		const getAllClients = async () => {
 			setloadingClients(true);
 			await getClients();
 			setloadingClients(false);
 		};
 
-		if (clients.length == 0) void getAllClasses();
+		if (clients.length == 0) void getAllClients();
 	}, []);
 
 	const handleSubmit = () => {

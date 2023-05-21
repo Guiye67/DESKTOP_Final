@@ -68,3 +68,7 @@
 	cursor: pointer;
 	color: white;
 }
+
+.sidebar span {
+	vertical-align: middle;
+}
