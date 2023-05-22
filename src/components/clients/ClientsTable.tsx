@@ -73,7 +73,18 @@ export const ClientsTable: React.FC<Props> = ({ setToDelete }: Props) => {
 									<TableCell>{client.email}</TableCell>
 									<TableCell>{client.name}</TableCell>
 									<TableCell>{client.surname}</TableCell>
-									<TableCell>{client.payment}</TableCell>
+									<TableCell
+										style={
+											Date.parse(client.payment) < new Date().getTime() ||
+											client.payment == '0'
+												? { color: 'red' }
+												: { color: 'green' }
+										}
+									>
+										{client.payment == '0'
+											? '0'
+											: new Date(client.payment).toLocaleDateString()}
+									</TableCell>
 									<TableCell className="text-right">
 										{generateClassesString(client.classes)}
 									</TableCell>

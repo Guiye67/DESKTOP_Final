@@ -51,7 +51,7 @@ export const ClientUpdater: React.FC<Props> = ({
 			email,
 			name,
 			surname,
-			payment,
+			payment: new Date(payment).toISOString().substring(0, 10),
 			classes: newClasses,
 		};
 
@@ -91,10 +91,9 @@ export const ClientUpdater: React.FC<Props> = ({
 					</TableCell>
 					<TableCell>
 						<input
-							type="text"
+							type="date"
 							value={payment}
 							onChange={(e) => setPayment(e.target.value)}
-							size={1}
 						/>
 					</TableCell>
 					<TableCell className="text-right">

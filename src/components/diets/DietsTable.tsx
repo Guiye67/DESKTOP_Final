@@ -32,42 +32,48 @@ export const DietsTable: React.FC<Props> = ({
 				)}
 			</div>
 
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableHeaderCell>ID</TableHeaderCell>
-						<TableHeaderCell>Client</TableHeaderCell>
-						<TableHeaderCell>Objective</TableHeaderCell>
-						<TableHeaderCell className="text-right"></TableHeaderCell>
-					</TableRow>
-				</TableHead>
-
-				<TableBody>
-					{diets.map((diet) => (
-						<TableRow key={diet.id}>
-							<TableCell>{diet.id}</TableCell>
-							<TableCell>{diet.client}</TableCell>
-							<TableCell className="w-full">
-								{diet.objective.length > 30
-									? `${diet.objective.slice(0, 30)}...`
-									: diet.objective}
-							</TableCell>
-							<TableCell className="text-right">
-								<i
-									className="bi bi-zoom-in"
-									onClick={() => {
-										setToView(diet);
-									}}
-								></i>
-								<i
-									className="bi bi-trash"
-									onClick={() => setToDelete([diet.id, diet.client])}
-								></i>
-							</TableCell>
+			{diets.length == 0 ? (
+				<i style={{ fontSize: 'medium', cursor: 'default' }}>
+					There are no {title.toLowerCase()} diets
+				</i>
+			) : (
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableHeaderCell>ID</TableHeaderCell>
+							<TableHeaderCell>Client</TableHeaderCell>
+							<TableHeaderCell>Objective</TableHeaderCell>
+							<TableHeaderCell className="text-right"></TableHeaderCell>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
+					</TableHead>
+
+					<TableBody>
+						{diets.map((diet) => (
+							<TableRow key={diet.id}>
+								<TableCell>{diet.id}</TableCell>
+								<TableCell>{diet.client}</TableCell>
+								<TableCell className="w-full">
+									{diet.objective.length > 30
+										? `${diet.objective.slice(0, 30)}...`
+										: diet.objective}
+								</TableCell>
+								<TableCell className="text-right">
+									<i
+										className="bi bi-zoom-in"
+										onClick={() => {
+											setToView(diet);
+										}}
+									></i>
+									<i
+										className="bi bi-trash"
+										onClick={() => setToDelete([diet.id, diet.client])}
+									></i>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			)}
 		</>
 	);
 };

@@ -10,6 +10,7 @@ import {
 	LoginPage,
 	PageNotExists,
 } from './pages/Pages';
+import { AuthVerify } from './common/AuthVerify';
 
 function App() {
 	const LoginContainer = () => {
@@ -49,6 +50,7 @@ function App() {
 					<Route path="/" element={<LoginContainer />} />
 					<Route path="*" element={<DefaultContainer />} />
 				</Routes>
+				<AuthVerify />
 			</Router>
 		</div>
 	);

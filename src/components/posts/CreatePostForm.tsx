@@ -150,7 +150,7 @@ export const CreatePostForm: React.FC<Props> = ({ setCreating }: Props) => {
 				)}
 				{!loading && result != '' && result == 'ok' && (
 					<Alert severity="success" className="alert">
-						Success: Client created
+						Success: Post created
 					</Alert>
 				)}
 			</Card>
