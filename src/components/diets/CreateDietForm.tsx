@@ -54,6 +54,11 @@ export const CreateDietForm: React.FC<Props> = ({ setCreating }: Props) => {
 			setResult(postResult);
 		} else {
 			setResult('ok');
+			setDietClient('');
+			setAge('');
+			setGender('');
+			setWeight('');
+			setHeight('');
 			form.reset();
 			setTimeout(() => {
 				setCreating(false);

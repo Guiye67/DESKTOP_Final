@@ -40,7 +40,6 @@ export const SuggestionsTabe: React.FC<Props> = ({
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableHeaderCell>ID</TableHeaderCell>
 							<TableHeaderCell>Title</TableHeaderCell>
 							<TableHeaderCell>Client</TableHeaderCell>
 							<TableHeaderCell>Description</TableHeaderCell>
@@ -51,12 +50,11 @@ export const SuggestionsTabe: React.FC<Props> = ({
 					<TableBody>
 						{suggestions.map((sugg) => (
 							<TableRow key={sugg.id}>
-								<TableCell>{sugg.id}</TableCell>
 								<TableCell>{sugg.title}</TableCell>
 								<TableCell>{sugg.client}</TableCell>
 								<TableCell className="w-full">
-									{sugg.description.length > 30
-										? `${sugg.description.slice(0, 30)}...`
+									{sugg.description.length > 70
+										? `${sugg.description.slice(0, 70)}...`
 										: sugg.description}
 								</TableCell>
 								<TableCell className="text-right">

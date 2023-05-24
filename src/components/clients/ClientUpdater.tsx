@@ -64,7 +64,6 @@ export const ClientUpdater: React.FC<Props> = ({
 				<Alert severity="error">Error: {result}</Alert>
 			) : (
 				<>
-					<TableCell>{client.id}</TableCell>
 					<TableCell>
 						<input
 							type="text"

@@ -40,8 +40,9 @@ export const DietsTable: React.FC<Props> = ({
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableHeaderCell>ID</TableHeaderCell>
 							<TableHeaderCell>Client</TableHeaderCell>
+							<TableHeaderCell>Age</TableHeaderCell>
+							<TableHeaderCell>Gender</TableHeaderCell>
 							<TableHeaderCell>Objective</TableHeaderCell>
 							<TableHeaderCell className="text-right"></TableHeaderCell>
 						</TableRow>
@@ -50,8 +51,9 @@ export const DietsTable: React.FC<Props> = ({
 					<TableBody>
 						{diets.map((diet) => (
 							<TableRow key={diet.id}>
-								<TableCell>{diet.id}</TableCell>
 								<TableCell>{diet.client}</TableCell>
+								<TableCell>{diet.age}</TableCell>
+								<TableCell>{diet.gender}</TableCell>
 								<TableCell className="w-full">
 									{diet.objective.length > 30
 										? `${diet.objective.slice(0, 30)}...`

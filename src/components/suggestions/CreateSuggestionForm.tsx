@@ -53,6 +53,8 @@ export const CreateSuggestionForm: React.FC<Props> = ({
 			setResult(postResult);
 		} else {
 			setResult('ok');
+			setSuggClient('');
+			setDescription('');
 			form.reset();
 			setTimeout(() => {
 				setCreating(false);

@@ -38,6 +38,7 @@ function App() {
 						<Route path="/diets" element={<DietsPage />} />
 						<Route path="*" element={<PageNotExists />} />
 					</Routes>
+					<AuthVerify />
 				</div>
 			</>
 		);
@@ -50,7 +51,6 @@ function App() {
 					<Route path="/" element={<LoginContainer />} />
 					<Route path="*" element={<DefaultContainer />} />
 				</Routes>
-				<AuthVerify />
 			</Router>
 		</div>
 	);

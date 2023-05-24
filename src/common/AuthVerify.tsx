@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Admin } from '../models/Admin';
@@ -40,6 +38,8 @@ export const AuthVerify = () => {
 				logout();
 				navigate('/');
 			}
+		} else {
+			navigate('/');
 		}
 	}, [location]);
 

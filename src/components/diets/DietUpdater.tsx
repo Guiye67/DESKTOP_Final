@@ -100,7 +100,7 @@ export const DietUpdater: React.FC<Props> = ({
 					<Alert severity="error">Error: {result}</Alert>
 				) : (
 					<>
-						<Title>Diet ID: {diet.id}</Title>
+						<Title>Updating: {diet.id}</Title>
 						<Table>
 							<TableBody>
 								<TableRow>

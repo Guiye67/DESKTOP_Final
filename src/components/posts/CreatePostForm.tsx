@@ -48,6 +48,7 @@ export const CreatePostForm: React.FC<Props> = ({ setCreating }: Props) => {
 				}, 2000);
 			} else {
 				setResult('ok');
+				setDescription('');
 				form.reset();
 				setTimeout(() => {
 					setCreating(false);

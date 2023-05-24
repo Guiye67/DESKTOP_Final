@@ -44,7 +44,6 @@ export const PostsTable: React.FC<Props> = ({
 				<TableHead>
 					<TableRow>
 						<TableHeaderCell></TableHeaderCell>
-						<TableHeaderCell>ID</TableHeaderCell>
 						<TableHeaderCell>Title</TableHeaderCell>
 						<TableHeaderCell>Muscle</TableHeaderCell>
 						<TableHeaderCell>Description</TableHeaderCell>
@@ -62,12 +61,11 @@ export const PostsTable: React.FC<Props> = ({
 									id="small-image"
 								/>
 							</TableCell>
-							<TableCell>{post.id}</TableCell>
 							<TableCell>{post.title}</TableCell>
 							<TableCell>{post.muscle}</TableCell>
 							<TableCell className="w-full">
-								{post.description.length > 50
-									? `${post.description.slice(0, 50)}...`
+								{post.description.length > 80
+									? `${post.description.slice(0, 80)}...`
 									: post.description}
 							</TableCell>
 							<TableCell className="text-right">

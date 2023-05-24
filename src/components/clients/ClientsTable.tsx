@@ -50,7 +50,6 @@ export const ClientsTable: React.FC<Props> = ({ setToDelete }: Props) => {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableHeaderCell> ID </TableHeaderCell>
 						<TableHeaderCell>Email</TableHeaderCell>
 						<TableHeaderCell>Name</TableHeaderCell>
 						<TableHeaderCell>Surname</TableHeaderCell>
@@ -69,7 +68,6 @@ export const ClientsTable: React.FC<Props> = ({ setToDelete }: Props) => {
 								</>
 							) : (
 								<>
-									<TableCell>{client.id}</TableCell>
 									<TableCell>{client.email}</TableCell>
 									<TableCell>{client.name}</TableCell>
 									<TableCell>{client.surname}</TableCell>

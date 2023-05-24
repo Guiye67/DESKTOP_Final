@@ -1,8 +1,8 @@
 export default function PageNotExists() {
 	return (
-		<>
-			<h1>Page not found</h1>
+		<div className="m-6">
+			<h1>PAGE NOT FOUND</h1>
 			<p>Sorry, the page you are trying to access does not exist.</p>
-		</>
+		</div>
 	);
 }
