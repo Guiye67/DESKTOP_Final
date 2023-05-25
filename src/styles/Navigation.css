@@ -21,11 +21,13 @@
 
 .sidebar ul {
 	padding-inline-start: 0px;
+	text-transform: uppercase;
 }
 
 .sidebar ul li {
 	padding: 15px;
 	list-style: none;
+	text-shadow: -5px 4px 10px var(--color-dark-purple);
 }
 
 .sidebar ul li:hover {
@@ -71,4 +73,5 @@
 
 .sidebar span {
 	vertical-align: middle;
+	text-shadow: none;
 }

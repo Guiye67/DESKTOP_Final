@@ -32,17 +32,28 @@
 }
 
 .content .title h1 {
-	width: 220px;
+	width: 250px;
 	display: inline;
 	background: linear-gradient(to bottom right, transparent 50%, white 50%)
 			no-repeat,
 		linear-gradient(to top right, transparent 0.1%, white 0.1%) no-repeat,
 		linear-gradient(to bottom left, transparent 50%, white 50%) no-repeat;
-	background-size: 21px 100%, 180px 100%, 20px 100%;
-	background-position: -1px 0%, 20px 0%, 200px 0%;
+	background-size: 21px 100%, 210px 100%, 20px 100%;
+	background-position: -1px 0%, 20px 0%, 230px 0%;
 	text-align: center;
 	z-index: 99;
+	text-transform: uppercase;
 	color: var(--color-dark-purple);
+	text-shadow:0 1px 1px #bcbcbc, 
+	0px 2px 1px #c2c2c2, 
+	-1px 3px 1px #c8c8c8, 
+	-1px 4px 1px #cbcbcb,
+	-2px 5px 1px #d2d2d2,
+	-2px 6px 1px #d5d5d5,
+	-3px 7px 1px #e2e2e2,
+	-3px 8px 1px #e6e6e6, 
+	-4px 9px 1px #eaeaea,
+	-4px 10px 1px #efefef;
 }
 
 .content .title button {
