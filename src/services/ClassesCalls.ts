@@ -1,5 +1,6 @@
 import { CallError } from '../models/CallError';
 import { Class, ClassNew, ClassResponse } from '../models/Class';
+import { IP } from '../utils/constants/constants';
 
 export const GetAllClasses = async (token: string) => {
 	const requestOptions: RequestInit = {
@@ -10,37 +11,35 @@ export const GetAllClasses = async (token: string) => {
 		},
 	};
 
-	return fetch('http://localhost:8080/classes/', requestOptions).then(
-		async (response) => {
-			if (response.status != 200) {
-				const err: CallError = (await response.json()) as CallError;
-				return [
-					{
-						id: '-1',
-						name: err.message,
-						days: [],
-						hour: '',
-						duration: '',
-						signedUp: [],
-					},
-				] as Class[];
-			}
-
-			const data: ClassResponse[] = (await response.json()) as ClassResponse[];
-			const output: Class[] = [];
-			data.forEach((item) => {
-				output.push({
-					id: item._id,
-					name: item.name,
-					days: item.days,
-					hour: item.hour,
-					duration: item.duration,
-					signedUp: item.signedUp,
-				} as Class);
-			});
-			return output;
+	return fetch(`${IP}/classes/`, requestOptions).then(async (response) => {
+		if (response.status != 200) {
+			const err: CallError = (await response.json()) as CallError;
+			return [
+				{
+					id: '-1',
+					name: err.message,
+					days: [],
+					hour: '',
+					duration: '',
+					signedUp: [],
+				},
+			] as Class[];
 		}
-	);
+
+		const data: ClassResponse[] = (await response.json()) as ClassResponse[];
+		const output: Class[] = [];
+		data.forEach((item) => {
+			output.push({
+				id: item._id,
+				name: item.name,
+				days: item.days,
+				hour: item.hour,
+				duration: item.duration,
+				signedUp: item.signedUp,
+			} as Class);
+		});
+		return output;
+	});
 };
 
 export const CreateClass = (newClass: ClassNew, token: string) => {
@@ -53,16 +52,14 @@ export const CreateClass = (newClass: ClassNew, token: string) => {
 		body: JSON.stringify(newClass),
 	};
 
-	return fetch('http://localhost:8080/classes/', requestOptions).then(
-		async (response) => {
-			if (response.status != 201) {
-				const err: CallError = (await response.json()) as CallError;
-				return err.message;
-			}
-
-			return 'ok';
+	return fetch(`${IP}/classes/`, requestOptions).then(async (response) => {
+		if (response.status != 201) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
 		}
-	);
+
+		return 'ok';
+	});
 };
 
 export const UpdateClass = (updatedClass: Class, token: string) => {
@@ -75,17 +72,16 @@ export const UpdateClass = (updatedClass: Class, token: string) => {
 		body: JSON.stringify(updatedClass),
 	};
 
-	return fetch(
-		`http://localhost:8080/classes/${updatedClass.id}`,
-		requestOptions
-	).then(async (response) => {
-		if (response.status > 299) {
-			const err: CallError = (await response.json()) as CallError;
-			return err.message;
-		}
+	return fetch(`${IP}/classes/${updatedClass.id}`, requestOptions).then(
+		async (response) => {
+			if (response.status > 299) {
+				const err: CallError = (await response.json()) as CallError;
+				return err.message;
+			}
 
-		return 'ok';
-	});
+			return 'ok';
+		}
+	);
 };
 
 export const DeleteClass = (id: string, token: string) => {
@@ -96,14 +92,12 @@ export const DeleteClass = (id: string, token: string) => {
 			Authorization: `Bearer: ${token}`,
 		},
 	};
-	return fetch(`http://localhost:8080/classes/${id}`, requestOptions).then(
-		async (response) => {
-			if (response.status != 200) {
-				const err: CallError = (await response.json()) as CallError;
-				return err.message;
-			}
-
-			return 'ok';
+	return fetch(`${IP}/classes/${id}`, requestOptions).then(async (response) => {
+		if (response.status != 200) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
 		}
-	);
+
+		return 'ok';
+	});
 };

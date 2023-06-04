@@ -4,6 +4,7 @@ import {
 	SuggestionNew,
 	SuggestionResponse,
 } from '../models/Suggestion';
+import { IP } from '../utils/constants/constants';
 
 export const GetAllSuggestions = async (token: string) => {
 	const requestOptions: RequestInit = {
@@ -14,36 +15,34 @@ export const GetAllSuggestions = async (token: string) => {
 		},
 	};
 
-	return fetch('http://localhost:8080/suggestions/', requestOptions).then(
-		async (response) => {
-			if (response.status != 200) {
-				const err: CallError = (await response.json()) as CallError;
-				return [
-					{
-						id: '-1',
-						title: err.message,
-						client: '',
-						description: '',
-						resolved: false,
-					},
-				] as Suggestion[];
-			}
-
-			const data: SuggestionResponse[] =
-				(await response.json()) as SuggestionResponse[];
-			const output: Suggestion[] = [];
-			data.forEach((sugg) => {
-				output.push({
-					id: sugg._id,
-					title: sugg.title,
-					client: sugg.client,
-					description: sugg.description,
-					resolved: sugg.resolved,
-				} as Suggestion);
-			});
-			return output;
+	return fetch(`${IP}/suggestions/`, requestOptions).then(async (response) => {
+		if (response.status != 200) {
+			const err: CallError = (await response.json()) as CallError;
+			return [
+				{
+					id: '-1',
+					title: err.message,
+					client: '',
+					description: '',
+					resolved: false,
+				},
+			] as Suggestion[];
 		}
-	);
+
+		const data: SuggestionResponse[] =
+			(await response.json()) as SuggestionResponse[];
+		const output: Suggestion[] = [];
+		data.forEach((sugg) => {
+			output.push({
+				id: sugg._id,
+				title: sugg.title,
+				client: sugg.client,
+				description: sugg.description,
+				resolved: sugg.resolved,
+			} as Suggestion);
+		});
+		return output;
+	});
 };
 
 export const CreateSuggestion = (
@@ -59,16 +58,14 @@ export const CreateSuggestion = (
 		body: JSON.stringify(newSuggestion),
 	};
 
-	return fetch('http://localhost:8080/suggestions/', requestOptions).then(
-		async (response) => {
-			if (response.status != 201) {
-				const err: CallError = (await response.json()) as CallError;
-				return err.message;
-			}
-
-			return 'ok';
+	return fetch(`${IP}/suggestions/`, requestOptions).then(async (response) => {
+		if (response.status != 201) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
 		}
-	);
+
+		return 'ok';
+	});
 };
 
 export const UpdateSuggestion = (
@@ -85,7 +82,7 @@ export const UpdateSuggestion = (
 	};
 
 	return fetch(
-		`http://localhost:8080/suggestions/${updatedSuggestion.id}`,
+		`${IP}/suggestions/${updatedSuggestion.id}`,
 		requestOptions
 	).then(async (response) => {
 		if (response.status > 299) {
@@ -105,7 +102,7 @@ export const DeleteSuggestions = (id: string, token: string) => {
 			Authorization: `Bearer: ${token}`,
 		},
 	};
-	return fetch(`http://localhost:8080/suggestions/${id}`, requestOptions).then(
+	return fetch(`${IP}/suggestions/${id}`, requestOptions).then(
 		async (response) => {
 			if (response.status != 200) {
 				const err: CallError = (await response.json()) as CallError;

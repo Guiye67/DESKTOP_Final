@@ -5,6 +5,7 @@ import {
 	PostNew,
 	PostResponse,
 } from '../models/Post';
+import { IP } from '../utils/constants/constants';
 
 export const GetAllPosts = async (token: string) => {
 	const requestOptions: RequestInit = {
@@ -15,35 +16,33 @@ export const GetAllPosts = async (token: string) => {
 		},
 	};
 
-	return fetch('http://localhost:8080/posts/', requestOptions).then(
-		async (response) => {
-			if (response.status != 200) {
-				const err: CallError = (await response.json()) as CallError;
-				return [
-					{
-						id: '-1',
-						title: err.message,
-						muscle: '',
-						description: '',
-						images: '',
-					},
-				] as Post[];
-			}
-
-			const data: PostResponse[] = (await response.json()) as PostResponse[];
-			const output: Post[] = [];
-			data.forEach((post) => {
-				output.push({
-					id: post._id,
-					title: post.title,
-					muscle: post.muscle,
-					description: post.description,
-					images: post.images,
-				} as Post);
-			});
-			return output;
+	return fetch(`${IP}/posts/`, requestOptions).then(async (response) => {
+		if (response.status != 200) {
+			const err: CallError = (await response.json()) as CallError;
+			return [
+				{
+					id: '-1',
+					title: err.message,
+					muscle: '',
+					description: '',
+					images: '',
+				},
+			] as Post[];
 		}
-	);
+
+		const data: PostResponse[] = (await response.json()) as PostResponse[];
+		const output: Post[] = [];
+		data.forEach((post) => {
+			output.push({
+				id: post._id,
+				title: post.title,
+				muscle: post.muscle,
+				description: post.description,
+				images: post.images,
+			} as Post);
+		});
+		return output;
+	});
 };
 
 export const CreatePost = (newPost: PostNew, token: string) => {
@@ -56,18 +55,16 @@ export const CreatePost = (newPost: PostNew, token: string) => {
 		body: JSON.stringify(newPost),
 	};
 
-	return fetch('http://localhost:8080/posts/', requestOptions).then(
-		async (response) => {
-			if (response.status != 201) {
-				const err: CallError = (await response.json()) as CallError;
-				return err.message;
-			}
-
-			const data: PostCreateResponse =
-				(await response.json()) as PostCreateResponse;
-			return `ok-${data.newPost._id}`;
+	return fetch(`${IP}/posts/`, requestOptions).then(async (response) => {
+		if (response.status != 201) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
 		}
-	);
+
+		const data: PostCreateResponse =
+			(await response.json()) as PostCreateResponse;
+		return `ok-${data.newPost._id}`;
+	});
 };
 
 export const UploadImage = (image: File, id: string, token: string) => {
@@ -82,7 +79,7 @@ export const UploadImage = (image: File, id: string, token: string) => {
 		body: data,
 	};
 
-	return fetch(`http://localhost:8080/posts/img/${id}`, requestOptions).then(
+	return fetch(`${IP}/posts/img/${id}`, requestOptions).then(
 		async (response) => {
 			if (response.status != 200) {
 				const err: CallError = (await response.json()) as CallError;
@@ -104,17 +101,16 @@ export const UpdatePost = (updatedPost: Post, token: string) => {
 		body: JSON.stringify(updatedPost),
 	};
 
-	return fetch(
-		`http://localhost:8080/posts/${updatedPost.id}`,
-		requestOptions
-	).then(async (response) => {
-		if (response.status > 299) {
-			const err: CallError = (await response.json()) as CallError;
-			return err.message;
-		}
+	return fetch(`${IP}/posts/${updatedPost.id}`, requestOptions).then(
+		async (response) => {
+			if (response.status > 299) {
+				const err: CallError = (await response.json()) as CallError;
+				return err.message;
+			}
 
-		return 'ok';
-	});
+			return 'ok';
+		}
+	);
 };
 
 export const DeletePost = (id: string, token: string) => {
@@ -125,14 +121,12 @@ export const DeletePost = (id: string, token: string) => {
 			Authorization: `Bearer: ${token}`,
 		},
 	};
-	return fetch(`http://localhost:8080/posts/${id}`, requestOptions).then(
-		async (response) => {
-			if (response.status != 200) {
-				const err: CallError = (await response.json()) as CallError;
-				return err.message;
-			}
-
-			return 'ok';
+	return fetch(`${IP}/posts/${id}`, requestOptions).then(async (response) => {
+		if (response.status != 200) {
+			const err: CallError = (await response.json()) as CallError;
+			return err.message;
 		}
-	);
+
+		return 'ok';
+	});
 };

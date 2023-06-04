@@ -13,3 +13,4 @@ export const HOURS = [
 	'19',
 ];
 export const MINS = ['00', '15', '30', '45'];
+export const IP = 'http://localhost:8080';
