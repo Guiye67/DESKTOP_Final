@@ -10,6 +10,7 @@ import {
 import { Post } from '../../models/Post';
 import { ArrowLongLeftIcon } from '@heroicons/react/24/solid';
 import { CustomTextArea } from '../custom/CustomTextArea';
+import { IP } from '../../utils/constants/constants';
 
 interface Props {
 	setToUpdate: (value: Post | null) => void;
@@ -39,10 +40,7 @@ export const PostView: React.FC<Props> = ({
 					<TableBody>
 						<TableRow>
 							<TableCell colSpan={2}>
-								<img
-									src={`http://localhost:8080/posts/img/${post.images}`}
-									alt="Post image"
-								/>
+								<img src={`${IP}/posts/img/${post.images}`} alt="Post image" />
 							</TableCell>
 						</TableRow>
 						<TableRow>

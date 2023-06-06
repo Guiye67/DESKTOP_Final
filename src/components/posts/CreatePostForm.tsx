@@ -29,6 +29,8 @@ export const CreatePostForm: React.FC<Props> = ({ setCreating }: Props) => {
 
 		const postResult = await createNewPost(newPost);
 
+		console.log(postResult);
+
 		if (postResult.split('-')[0] != 'ok') {
 			setResult(postResult);
 
@@ -54,6 +56,15 @@ export const CreatePostForm: React.FC<Props> = ({ setCreating }: Props) => {
 					setCreating(false);
 				}, 1500);
 			}
+		} else {
+			setLoading(false);
+
+			setResult('ok');
+			setDescription('');
+			form.reset();
+			setTimeout(() => {
+				setCreating(false);
+			}, 1500);
 		}
 	};
 
