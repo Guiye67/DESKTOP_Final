@@ -90,7 +90,7 @@ export const CreateClassForm: React.FC<Props> = ({ setCreating }: Props) => {
 								<MultiSelectBox value={[...days]} onValueChange={setDays}>
 									<MultiSelectBoxItem value="Mon" text="Monday" />
 									<MultiSelectBoxItem value="Tue" text="Tuesday" />
-									<MultiSelectBoxItem value="Wen" text="Wendesday" />
+									<MultiSelectBoxItem value="Wed" text="Wednesday" />
 									<MultiSelectBoxItem value="Thu" text="Thursday" />
 									<MultiSelectBoxItem value="Fri" text="Friday" />
 								</MultiSelectBox>

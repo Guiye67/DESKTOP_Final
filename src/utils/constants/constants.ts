@@ -1,4 +1,4 @@
-export const WEEK_DAYS = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri'];
+export const WEEK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 export const HOURS = [
 	'9',
 	'10',
